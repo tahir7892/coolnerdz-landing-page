@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CoolNerdz | Coming Soon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1179,6 +1179,31 @@
       section { padding: 68px 0; }
       .footer-row { flex-direction: column; align-items: flex-start; }
     }
+
+    .w-82 { width: 82%; }
+    .w-64 { width: 64%; }
+    .w-48 { width: 48%; }
+    .bg-sky { background: var(--sky); }
+    .bg-sage { background: var(--sage); }
+    .bg-rose { background: var(--rose); }
+    .bg-mint { background: var(--mint); }
+    .bg-lavender { background: var(--lavender); }
+    .tint-sky { --tint: var(--sky); }
+    .tint-sage { --tint: var(--sage); }
+    .tint-rose { --tint: var(--rose); }
+    .tint-mint { --tint: var(--mint); }
+    .tint-lavender { --tint: var(--lavender); }
+    .tint-aud-1 { --tint: rgba(220,236,247,.74); }
+    .tint-aud-2 { --tint: rgba(217,233,209,.8); }
+    .tint-aud-3 { --tint: rgba(255,199,184,.82); }
+    .tint-aud-4 { --tint: rgba(232,222,244,.78); }
+    .tint-aud-5 { --tint: rgba(190,232,212,.78); }
+    .tint-aud-6 { --tint: rgba(255,229,184,.76); }
+    .mt-18 { margin-top: 18px; }
+    .mt-4-0-0 { margin: 4px 0 0; }
+    .support-title { margin: 0 0 10px; font-family: var(--display); font-weight: 300; font-size: 38px; line-height: .95; }
+    .support-desc { margin: 0; color: rgba(255,255,255,.72); }
+
   </style>
 </head>
 <body>
@@ -1216,7 +1241,7 @@
         </div>
       </div>
 
-      <div class="theatre" aria-label="CoolNerdz product interface preview">
+      <section class="theatre" aria-label="CoolNerdz product interface preview">
         <div class="browser">
           <div class="browser-top">
             <div class="lights"><i></i><i></i><i></i></div>
@@ -1231,9 +1256,9 @@
             <div class="glass-card">
               <p class="small muted">Course marketplace</p>
               <h3>Student athlete development</h3>
-              <div class="course-row"><span class="course-icon">01</span><span>Performance mindset</span><span class="bar"><i style="width:82%"></i></span></div>
-              <div class="course-row"><span class="course-icon">02</span><span>Nutrition basics</span><span class="bar"><i style="width:64%"></i></span></div>
-              <div class="course-row"><span class="course-icon">03</span><span>Recovery and calm</span><span class="bar"><i style="width:48%"></i></span></div>
+              <div class="course-row"><span class="course-icon">01</span><span>Performance mindset</span><span class="bar"><i class="w-82"></i></span></div>
+              <div class="course-row"><span class="course-icon">02</span><span>Nutrition basics</span><span class="bar"><i class="w-64"></i></span></div>
+              <div class="course-row"><span class="course-icon">03</span><span>Recovery and calm</span><span class="bar"><i class="w-48"></i></span></div>
             </div>
             <div class="mini-stack">
               <div class="mini-card"><p class="small muted">AI draft</p><div class="stat">6wk</div><p class="small muted">course outline ready</p></div>
@@ -1254,10 +1279,10 @@
           <div class="phone-screen">
             <b>Calm check-in</b>
             <div class="breathe">Breathe</div>
-            <div class="booking"><b>Tomorrow, 4:30 PM</b><br />Counselor appointment available</div>
+            <div class="booking"><b>Tomorrow, 4:30 PM</b><br>Counselor appointment available</div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </header>
 
@@ -1266,7 +1291,7 @@
       <div class="wrap">
         <div class="audience-wrap">
           <div class="audience-row">
-            <div class="audience featured" style="--tint: rgba(220,236,247,.74)">
+            <div class="audience featured tint-aud-1">
               <div class="audience-top"><div class="icon">↗</div><span class="audience-label">Learner path</span></div>
               <div class="audience-body">
                 <b>Students</b>
@@ -1274,21 +1299,21 @@
                 <div class="audience-metrics"><i>Course goals</i><i>Progress map</i><i>Calm check-ins</i></div>
               </div>
             </div>
-            <div class="audience" style="--tint: rgba(217,233,209,.8)">
+            <div class="audience tint-aud-2">
               <div class="audience-top"><div class="icon">✦</div><span class="audience-label">Creator tools</span></div>
               <div class="audience-body">
                 <b>Teachers</b>
                 <span>Build course outlines faster, review AI drafts, and manage learners.</span>
               </div>
             </div>
-            <div class="audience" style="--tint: rgba(255,199,184,.82)">
+            <div class="audience tint-aud-3">
               <div class="audience-top"><div class="icon">◐</div><span class="audience-label">Programs</span></div>
               <div class="audience-body">
                 <b>Athletes</b>
                 <span>Use structured learning paths for development, mindset, and routines.</span>
               </div>
             </div>
-            <div class="audience featured" style="--tint: rgba(232,222,244,.78)">
+            <div class="audience featured tint-aud-4">
               <div class="audience-top"><div class="icon">☉</div><span class="audience-label">Support layer</span></div>
               <div class="audience-body">
                 <b>Counselors</b>
@@ -1296,14 +1321,14 @@
                 <div class="audience-metrics"><i>Profiles</i><i>Bookings</i><i>Availability</i></div>
               </div>
             </div>
-            <div class="audience" style="--tint: rgba(190,232,212,.78)">
+            <div class="audience tint-aud-5">
               <div class="audience-top"><div class="icon">⌁</div><span class="audience-label">Cohorts</span></div>
               <div class="audience-body">
                 <b>Academies</b>
                 <span>Organize groups, learning paths, and progress milestones in one place.</span>
               </div>
             </div>
-            <div class="audience" style="--tint: rgba(255,229,184,.76)">
+            <div class="audience tint-aud-6">
               <div class="audience-top"><div class="icon">◆</div><span class="audience-label">Insights</span></div>
               <div class="audience-body">
                 <b>Organizations</b>
@@ -1357,7 +1382,7 @@
           <p>Each person enters CoolNerdz with a different job to do, so the product experience adapts around their next best action.</p>
         </div>
 
-        <div class="role-tabs" aria-label="Role tabs">
+        <div class="role-tabs" role="tablist" aria-label="Role tabs">
           <div class="sliding-pill"></div>
           <div class="role-tab active" onclick="switchTab(this, 'stage-student')">Student</div>
           <div class="role-tab" onclick="switchTab(this, 'stage-teacher')">Teacher</div>
@@ -1365,11 +1390,11 @@
           <div class="role-tab" onclick="switchTab(this, 'stage-counselor')">Counselor</div>
         </div>
 
-        <div id="stage-student" class="role-stage" style="margin-top:18px">
+        <div id="stage-student" class="role-stage mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
-                <span class="tag" style="background:var(--sky)">Student journey</span>
+                <span class="tag bg-sky">Student journey</span>
                 <h3>From course discovery to calm progress.</h3>
                 <p>A learner can choose a course, follow milestones, reflect on progress, and access support when they need it.</p>
               </div>
@@ -1378,17 +1403,17 @@
 
             <div class="journey-grid">
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sky)">↗</div>
+                <div class="icon tint-sky">↗</div>
                 <b>Choose path</b>
                 <p>Browse courses and programs matched to goals.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sage)">✓</div>
+                <div class="icon tint-sage">✓</div>
                 <b>Track momentum</b>
                 <p>See weekly tasks, milestones, and completion.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--rose)">◌</div>
+                <div class="icon tint-rose">◌</div>
                 <b>Get support</b>
                 <p>Start a calm reset or book a counselor session.</p>
               </div>
@@ -1400,7 +1425,7 @@
               <div class="progress-top">
                 <div>
                   <b>Today’s progress</b>
-                  <p class="muted" style="margin:4px 0 0">Student dashboard preview</p>
+                  <p class="muted mt-4-0-0">Student dashboard preview</p>
                 </div>
                 <span class="status">On track</span>
               </div>
@@ -1414,17 +1439,17 @@
 
             <div class="support-panel">
               <span class="tag">Support moment</span>
-              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Built-in care, not an extra app.</h3>
-              <p style="margin:0;color:rgba(255,255,255,.72)">The wellness layer appears when the learner needs grounding, guidance, or a counselor booking.</p>
+              <h3 class="support-title">Built-in care, not an extra app.</h3>
+              <p class="support-desc">The wellness layer appears when the learner needs grounding, guidance, or a counselor booking.</p>
             </div>
           </div>
         </div>
 
-        <div id="stage-teacher" class="role-stage hidden" style="margin-top:18px">
+        <div id="stage-teacher" class="role-stage hidden mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
-                <span class="tag" style="background:var(--rose)">Teacher workflow</span>
+                <span class="tag bg-rose">Teacher workflow</span>
                 <h3>From outline to active learning.</h3>
                 <p>Teachers can use AI to build course drafts, review content, publish modules, and monitor cohort progress.</p>
               </div>
@@ -1433,17 +1458,17 @@
 
             <div class="journey-grid">
               <div class="path-card">
-                <div class="icon" style="--tint:var(--rose)">✦</div>
+                <div class="icon tint-rose">✦</div>
                 <b>Draft course</b>
                 <p>Generate outlines and lessons with AI.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sage)">✎</div>
-                <b>Review & edit</b>
+                <div class="icon tint-sage">✎</div>
+                <b>Review &amp; edit</b>
                 <p>Shape the content to your voice.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sky)">↗</div>
+                <div class="icon tint-sky">↗</div>
                 <b>Launch cohort</b>
                 <p>Publish modules and invite learners.</p>
               </div>
@@ -1455,7 +1480,7 @@
               <div class="progress-top">
                 <div>
                   <b>Today’s priorities</b>
-                  <p class="muted" style="margin:4px 0 0">Teacher dashboard</p>
+                  <p class="muted mt-4-0-0">Teacher dashboard</p>
                 </div>
                 <span class="status">2 Drafts</span>
               </div>
@@ -1469,17 +1494,17 @@
 
             <div class="support-panel">
               <span class="tag">Creator tools</span>
-              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Empowering educators with AI.</h3>
-              <p style="margin:0;color:rgba(255,255,255,.72)">AI starts the outline, but teachers maintain full control over the narrative and learning path.</p>
+              <h3 class="support-title">Empowering educators with AI.</h3>
+              <p class="support-desc">AI starts the outline, but teachers maintain full control over the narrative and learning path.</p>
             </div>
           </div>
         </div>
 
-        <div id="stage-athlete" class="role-stage hidden" style="margin-top:18px">
+        <div id="stage-athlete" class="role-stage hidden mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
-                <span class="tag" style="background:var(--mint)">Athlete program</span>
+                <span class="tag bg-mint">Athlete program</span>
                 <h3>From training routines to mental focus.</h3>
                 <p>Athletes can follow physical and mental development tracks, track performance milestones, and log daily habits.</p>
               </div>
@@ -1488,17 +1513,17 @@
 
             <div class="journey-grid">
               <div class="path-card">
-                <div class="icon" style="--tint:var(--mint)">◐</div>
+                <div class="icon tint-mint">◐</div>
                 <b>Select track</b>
                 <p>Follow tailored performance paths.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sky)">✓</div>
+                <div class="icon tint-sky">✓</div>
                 <b>Daily habits</b>
                 <p>Track nutrition and physical recovery.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--rose)">◌</div>
+                <div class="icon tint-rose">◌</div>
                 <b>Mental focus</b>
                 <p>Access calm and mindset routines.</p>
               </div>
@@ -1510,7 +1535,7 @@
               <div class="progress-top">
                 <div>
                   <b>Weekly momentum</b>
-                  <p class="muted" style="margin:4px 0 0">Athlete dashboard</p>
+                  <p class="muted mt-4-0-0">Athlete dashboard</p>
                 </div>
                 <span class="status">Strong</span>
               </div>
@@ -1524,17 +1549,17 @@
 
             <div class="support-panel">
               <span class="tag">Mindset layer</span>
-              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Integrating mental resilience.</h3>
-              <p style="margin:0;color:rgba(255,255,255,.72)">The platform bridges the gap between physical execution and psychological preparedness.</p>
+              <h3 class="support-title">Integrating mental resilience.</h3>
+              <p class="support-desc">The platform bridges the gap between physical execution and psychological preparedness.</p>
             </div>
           </div>
         </div>
 
-        <div id="stage-counselor" class="role-stage hidden" style="margin-top:18px">
+        <div id="stage-counselor" class="role-stage hidden mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
-                <span class="tag" style="background:var(--lavender)">Counselor dashboard</span>
+                <span class="tag bg-lavender">Counselor dashboard</span>
                 <h3>From availability to active support.</h3>
                 <p>Counselors can manage their profile, set working hours, and receive bookings directly from learners who need help.</p>
               </div>
@@ -1543,17 +1568,17 @@
 
             <div class="journey-grid">
               <div class="path-card">
-                <div class="icon" style="--tint:var(--lavender)">☉</div>
+                <div class="icon tint-lavender">☉</div>
                 <b>Set profile</b>
                 <p>Highlight specialties and approach.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--sky)">📅</div>
+                <div class="icon tint-sky">📅</div>
                 <b>Manage slots</b>
                 <p>Integrate calendar availability.</p>
               </div>
               <div class="path-card">
-                <div class="icon" style="--tint:var(--mint)">✓</div>
+                <div class="icon tint-mint">✓</div>
                 <b>Provide care</b>
                 <p>Host direct video or chat sessions.</p>
               </div>
@@ -1565,7 +1590,7 @@
               <div class="progress-top">
                 <div>
                   <b>Today's schedule</b>
-                  <p class="muted" style="margin:4px 0 0">Counselor interface</p>
+                  <p class="muted mt-4-0-0">Counselor interface</p>
                 </div>
                 <span class="status">Booked</span>
               </div>
@@ -1579,8 +1604,8 @@
 
             <div class="support-panel">
               <span class="tag">Care network</span>
-              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Bridging learning and wellbeing.</h3>
-              <p style="margin:0;color:rgba(255,255,255,.72)">Counselors provide the vital safety net for learners facing stress, burnout, or performance pressure.</p>
+              <h3 class="support-title">Bridging learning and wellbeing.</h3>
+              <p class="support-desc">Counselors provide the vital safety net for learners facing stress, burnout, or performance pressure.</p>
             </div>
           </div>
         </div>
@@ -1590,7 +1615,7 @@
     <section id="teachers">
       <div class="wrap studio">
         <div class="copy-block">
-          <span class="tag" style="background:var(--rose)">AI course builder</span>
+          <span class="tag bg-rose">AI course builder</span>
           <h2>Teachers stay in control. AI gets the first draft moving.</h2>
           <p class="lead">The product should feel empowering, not automatic. AI starts the outline; teachers shape, approve, and publish.</p>
         </div>
@@ -1723,7 +1748,7 @@
             <p>Collect interest from learners, teachers, athletes, counselors, and organizations before launch at coolnerdz.com.</p>
           </div>
           <form class="form">
-            <input type="email" placeholder="Email address" />
+            <input type="email" placeholder="Email address">
             <select>
               <option>Student</option>
               <option>Teacher</option>
@@ -1731,7 +1756,7 @@
               <option>Counselor</option>
               <option>Organization</option>
             </select>
-            <button class="btn" type="button">Join waitlist</button>
+            <button class="btn" type="submit">Join waitlist</button>
           </form>
         </div>
       </div>
