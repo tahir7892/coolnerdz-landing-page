@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: test -f index.html
+
+      - name: Lint HTML
+        run: npx --yes html-validate index.html
+
+  deploy:
+    name: Deploy to server
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add server to known_hosts
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${SSH_PORT:-22}" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync over SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            -e "ssh -p ${SSH_PORT:-22}" \
+            ./ "$SSH_USER@$SSH_HOST:/opt/coolnerdz-landing-page/"
