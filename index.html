@@ -55,6 +55,11 @@
       0%, 100% { transform: translateY(0) rotate(2.5deg); }
       50% { transform: translateY(-12px) rotate(1.5deg); }
     }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     a { color: inherit; text-decoration: none; }
     button, input, select { font: inherit; }
@@ -631,6 +636,8 @@
       color: var(--muted);
       font-size: 14px;
       font-weight: 860;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
     .role-tab.active {
       color: white;
@@ -642,6 +649,10 @@
       grid-template-columns: 1.18fr .82fr;
       gap: 18px;
       align-items: stretch;
+      animation: slideUp 0.4s ease-out;
+    }
+    .role-stage.hidden {
+      display: none;
     }
     .journey-card {
       position: relative;
@@ -1096,11 +1107,26 @@
       border-radius: 14px;
       background: rgba(255,255,255,.11);
       color: white;
-      padding: 0 14px;
+      padding: 0 16px;
       outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    input:focus, select:focus {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,.15);
+    }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+      padding-right: 44px;
+      cursor: pointer;
     }
     select option { color: var(--ink); }
-    .form .btn { background: var(--rose); color: var(--ink); box-shadow: none; }
+    .form .btn { background: var(--rose); color: var(--ink); box-shadow: none; font-weight: 800; font-size: 15px; }
 
     footer { padding: 36px 0 48px; color: var(--muted); }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 26px; border-top: 1px solid rgba(22,33,29,.1); }
@@ -1319,13 +1345,13 @@
         </div>
 
         <div class="role-tabs" aria-label="Role tabs">
-          <div class="role-tab active">Student</div>
-          <div class="role-tab">Teacher</div>
-          <div class="role-tab">Athlete</div>
-          <div class="role-tab">Counselor</div>
+          <div class="role-tab active" onclick="switchTab(this, 'stage-student')">Student</div>
+          <div class="role-tab" onclick="switchTab(this, 'stage-teacher')">Teacher</div>
+          <div class="role-tab" onclick="switchTab(this, 'stage-athlete')">Athlete</div>
+          <div class="role-tab" onclick="switchTab(this, 'stage-counselor')">Counselor</div>
         </div>
 
-        <div class="role-stage" style="margin-top:18px">
+        <div id="stage-student" class="role-stage" style="margin-top:18px">
           <div class="journey-card">
             <div class="journey-title">
               <div>
@@ -1376,6 +1402,171 @@
               <span class="tag">Support moment</span>
               <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Built-in care, not an extra app.</h3>
               <p style="margin:0;color:rgba(255,255,255,.72)">The wellness layer appears when the learner needs grounding, guidance, or a counselor booking.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="stage-teacher" class="role-stage hidden" style="margin-top:18px">
+          <div class="journey-card">
+            <div class="journey-title">
+              <div>
+                <span class="tag" style="background:var(--rose)">Teacher workflow</span>
+                <h3>From outline to active learning.</h3>
+                <p>Teachers can use AI to build course drafts, review content, publish modules, and monitor cohort progress.</p>
+              </div>
+              <div class="role-number">02</div>
+            </div>
+
+            <div class="journey-grid">
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--rose)">✦</div>
+                <b>Draft course</b>
+                <p>Generate outlines and lessons with AI.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sage)">✎</div>
+                <b>Review & edit</b>
+                <p>Shape the content to your voice.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sky)">↗</div>
+                <b>Launch cohort</b>
+                <p>Publish modules and invite learners.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-side">
+            <div class="progress-panel">
+              <div class="progress-top">
+                <div>
+                  <b>Today’s priorities</b>
+                  <p class="muted" style="margin:4px 0 0">Teacher dashboard</p>
+                </div>
+                <span class="status">2 Drafts</span>
+              </div>
+              <div class="ring"><span>2</span></div>
+              <div class="mini-list">
+                <div class="mini-row"><span>Course draft</span><span>Ready for review</span></div>
+                <div class="mini-row"><span>Submissions</span><span>4 pending</span></div>
+                <div class="mini-row"><span>Cohort</span><span>Starts next week</span></div>
+              </div>
+            </div>
+
+            <div class="support-panel">
+              <span class="tag">Creator tools</span>
+              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Empowering educators with AI.</h3>
+              <p style="margin:0;color:rgba(255,255,255,.72)">AI starts the outline, but teachers maintain full control over the narrative and learning path.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="stage-athlete" class="role-stage hidden" style="margin-top:18px">
+          <div class="journey-card">
+            <div class="journey-title">
+              <div>
+                <span class="tag" style="background:var(--mint)">Athlete program</span>
+                <h3>From training routines to mental focus.</h3>
+                <p>Athletes can follow physical and mental development tracks, track performance milestones, and log daily habits.</p>
+              </div>
+              <div class="role-number">03</div>
+            </div>
+
+            <div class="journey-grid">
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--mint)">◐</div>
+                <b>Select track</b>
+                <p>Follow tailored performance paths.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sky)">✓</div>
+                <b>Daily habits</b>
+                <p>Track nutrition and physical recovery.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--rose)">◌</div>
+                <b>Mental focus</b>
+                <p>Access calm and mindset routines.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-side">
+            <div class="progress-panel">
+              <div class="progress-top">
+                <div>
+                  <b>Weekly momentum</b>
+                  <p class="muted" style="margin:4px 0 0">Athlete dashboard</p>
+                </div>
+                <span class="status">Strong</span>
+              </div>
+              <div class="ring"><span>5</span></div>
+              <div class="mini-list">
+                <div class="mini-row"><span>Habit streak</span><span>5 days active</span></div>
+                <div class="mini-row"><span>Next session</span><span>Mindset reset</span></div>
+                <div class="mini-row"><span>Check-in</span><span>Due tomorrow</span></div>
+              </div>
+            </div>
+
+            <div class="support-panel">
+              <span class="tag">Mindset layer</span>
+              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Integrating mental resilience.</h3>
+              <p style="margin:0;color:rgba(255,255,255,.72)">The platform bridges the gap between physical execution and psychological preparedness.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="stage-counselor" class="role-stage hidden" style="margin-top:18px">
+          <div class="journey-card">
+            <div class="journey-title">
+              <div>
+                <span class="tag" style="background:var(--lavender)">Counselor dashboard</span>
+                <h3>From availability to active support.</h3>
+                <p>Counselors can manage their profile, set working hours, and receive bookings directly from learners who need help.</p>
+              </div>
+              <div class="role-number">04</div>
+            </div>
+
+            <div class="journey-grid">
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--lavender)">☉</div>
+                <b>Set profile</b>
+                <p>Highlight specialties and approach.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sky)">📅</div>
+                <b>Manage slots</b>
+                <p>Integrate calendar availability.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--mint)">✓</div>
+                <b>Provide care</b>
+                <p>Host direct video or chat sessions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-side">
+            <div class="progress-panel">
+              <div class="progress-top">
+                <div>
+                  <b>Today's schedule</b>
+                  <p class="muted" style="margin:4px 0 0">Counselor interface</p>
+                </div>
+                <span class="status">Booked</span>
+              </div>
+              <div class="ring"><span>3</span></div>
+              <div class="mini-list">
+                <div class="mini-row"><span>Upcoming</span><span>Session at 4:30 PM</span></div>
+                <div class="mini-row"><span>New booking</span><span>Review required</span></div>
+                <div class="mini-row"><span>Availability</span><span>2 slots open tomorrow</span></div>
+              </div>
+            </div>
+
+            <div class="support-panel">
+              <span class="tag">Care network</span>
+              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Bridging learning and wellbeing.</h3>
+              <p style="margin:0;color:rgba(255,255,255,.72)">Counselors provide the vital safety net for learners facing stress, burnout, or performance pressure.</p>
             </div>
           </div>
         </div>
@@ -1539,5 +1730,15 @@
       <span>coolnerdz.com · Built for learning, growth, and care.</span>
     </div>
   </footer>
+
+  <script>
+    function switchTab(clickedTab, targetId) {
+      document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+      clickedTab.classList.add('active');
+      
+      document.querySelectorAll('.role-stage').forEach(s => s.classList.add('hidden'));
+      document.getElementById(targetId).classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
