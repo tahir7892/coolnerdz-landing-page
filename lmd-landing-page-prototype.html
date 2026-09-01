@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoolNerdz | Coming Soon</title>
+  <style>
+    :root {
+      --porcelain: #f8f1e8;
+      --paper: #fffaf1;
+      --ink: #101615;
+      --moss: #21483f;
+      --pine: #092d29;
+      --sage: #d9e9d1;
+      --mint: #bee8d4;
+      --sky: #dcecf7;
+      --blue: #275bd8;
+      --clay: #d96f5f;
+      --rose: #ffc7b8;
+      --lavender: #e8def4;
+      --gold: #c7a85b;
+      --muted: #62706a;
+      --line: rgba(22, 33, 29, .12);
+      --display: "Cambon Light", Cambon, "Iowan Old Style", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --shadow: 0 28px 90px rgba(20, 35, 31, .16);
+      --soft-shadow: 0 12px 36px rgba(20, 35, 31, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(112deg, rgba(220,236,247,.76), transparent 34%),
+        linear-gradient(248deg, rgba(255,199,184,.62), transparent 32%),
+        linear-gradient(180deg, rgba(255,250,241,.7), rgba(248,241,232,1) 58%),
+        var(--porcelain);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 18px;
+      z-index: 20;
+      width: min(1100px, calc(100% - 32px));
+      margin: 18px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,.78);
+      border-radius: 22px;
+      background: rgba(255, 250, 241, .58);
+      backdrop-filter: blur(28px) saturate(180%);
+      box-shadow: 0 20px 70px rgba(22,33,29,.1);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px 7px 8px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.42);
+      font-weight: 820;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.16), transparent 38%),
+        linear-gradient(135deg, var(--pine), #4c7c5e);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 10px 24px rgba(22,33,29,.12);
+      font-size: 11px;
+    }
+    .brand-text { display: grid; gap: 1px; line-height: 1; }
+    .brand-text strong { font-size: 14px; }
+    .brand-text span { color: var(--muted); font-size: 10px; font-weight: 780; }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.4);
+      border: 1px solid rgba(22,33,29,.06);
+    }
+    .nav-links { display: flex; gap: 2px; color: #34443e; font-size: 13px; font-weight: 790; }
+    .nav-links a {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 12px;
+      color: rgba(22,33,29,.72);
+      transition: background .18s ease, color .18s ease;
+    }
+    .nav-links a:first-child,
+    .nav-links a:hover {
+      color: var(--ink);
+      background: rgba(255,250,241,.86);
+      box-shadow: inset 0 0 0 1px rgba(22,33,29,.06);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .domain-pill {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      background: rgba(255,255,255,.42);
+      border: 1px solid rgba(22,33,29,.06);
+      font-size: 12px;
+      font-weight: 820;
+    }
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--ink);
+      color: white;
+      font-size: 14px;
+      font-weight: 820;
+      box-shadow: 0 12px 26px rgba(22,33,29,.17);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .nav-cta {
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 14px;
+      font-size: 13px;
+    }
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(22,33,29,.2); }
+    .btn.secondary { background: rgba(255,255,255,.72); color: var(--ink); border-color: var(--line); box-shadow: none; }
+
+    .hero {
+      position: relative;
+      padding: 96px 0 70px;
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+    }
+    .hero::before {
+      content: "coolnerdz";
+      position: absolute;
+      top: 34px;
+      right: -16px;
+      color: rgba(16,22,21,.035);
+      font-family: var(--display);
+      font-size: clamp(96px, 18vw, 260px);
+      line-height: .8;
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .88fr) minmax(560px, 1.12fr);
+      gap: 54px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid rgba(239,128,111,.32);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .72);
+      color: var(--moss);
+      font-size: 13px;
+      font-weight: 820;
+      box-shadow: 0 10px 30px rgba(22,33,29,.06);
+    }
+    .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--clay); box-shadow: 0 0 0 7px rgba(239,128,111,.14); }
+    h1 {
+      margin: 24px 0 18px;
+      max-width: 780px;
+      font-family: var(--display);
+      font-size: clamp(54px, 7.1vw, 110px);
+      font-weight: 300;
+      line-height: .88;
+      letter-spacing: 0;
+    }
+    .lead { max-width: 620px; color: #4f5f59; font-size: clamp(17px, 1.55vw, 20px); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 24px; }
+    .micro { display: flex; flex-wrap: wrap; gap: 9px; color: #56645f; font-size: 13px; font-weight: 760; }
+    .micro span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 1px solid rgba(22,33,29,.1);
+      border-radius: 999px;
+      background: rgba(255,250,241,.72);
+      box-shadow: 0 8px 24px rgba(22,33,29,.05);
+    }
+    .micro span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--clay);
+    }
+    .micro span:nth-child(2)::before { background: var(--moss); }
+    .micro span:nth-child(3)::before { background: var(--gold); }
+    .micro span:nth-child(4)::before { background: var(--blue); }
+    .micro span:nth-child(5)::before { background: #8b66c8; }
+
+    .theatre {
+      position: relative;
+      min-height: 660px;
+      border-radius: 40px;
+      background:
+        linear-gradient(135deg, rgba(255,250,241,.94), rgba(255,255,255,.52)),
+        linear-gradient(145deg, rgba(9,45,41,.1), transparent 42%),
+        linear-gradient(34deg, rgba(190,232,212,.82) 0 30%, transparent 30% 100%),
+        linear-gradient(132deg, transparent 0 55%, rgba(255,199,184,.7) 55% 100%),
+        linear-gradient(225deg, rgba(220,236,247,.86), transparent 45%);
+      border: 1px solid rgba(255,255,255,.76);
+      box-shadow: 0 32px 110px rgba(20,35,31,.16);
+      padding: 28px;
+      overflow: hidden;
+    }
+    .theatre::after {
+      content: "";
+      position: absolute;
+      inset: 28px 28px auto auto;
+      width: 190px;
+      height: 1px;
+      background: rgba(16,22,21,.18);
+    }
+    .theatre::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,.58);
+      pointer-events: none;
+    }
+    .browser {
+      position: relative;
+      z-index: 2;
+      width: 81%;
+      min-height: 440px;
+      padding: 16px;
+      border-radius: 28px;
+      background: rgba(255,250,241,.9);
+      border: 1px solid rgba(22,33,29,.12);
+      box-shadow: 0 30px 80px rgba(22,33,29,.15);
+    }
+    .browser-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .lights { display: flex; gap: 7px; }
+    .lights i { width: 10px; height: 10px; border-radius: 50%; background: var(--clay); }
+    .lights i:nth-child(2) { background: #f5c76d; }
+    .lights i:nth-child(3) { background: #7bc99c; }
+    .browser-title { color: var(--muted); font-size: 12px; font-weight: 820; }
+    .hero-status {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .hero-status div {
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(22,33,29,.08);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .hero-status b { display: block; color: var(--ink); font-size: 18px; line-height: 1.1; }
+    .dash-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 14px; }
+    .glass-card, .mini-card {
+      border: 1px solid rgba(22,33,29,.1);
+      border-radius: 20px;
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--soft-shadow);
+    }
+    .glass-card { padding: 18px; }
+    .glass-card h3, .mini-card h4 { margin: 0; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; font-weight: 760; }
+    .course-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #f9f5eb;
+      border: 1px solid rgba(22,33,29,.08);
+      font-size: 13px;
+      font-weight: 760;
+    }
+    .course-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--sage);
+      color: var(--pine);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .bar { width: 96px; height: 8px; background: #e6dfd1; border-radius: 999px; overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--moss), #70bea0); }
+    .mini-stack { display: grid; gap: 14px; }
+    .mini-card { padding: 14px; }
+    .stat { font-family: var(--display); font-size: 42px; line-height: .9; font-weight: 300; }
+    .ai-card {
+      position: absolute;
+      z-index: 4;
+      left: 34px;
+      bottom: 48px;
+      width: 328px;
+      padding: 18px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #111816, #17332d);
+      color: white;
+      box-shadow: 0 28px 80px rgba(22,33,29,.28);
+    }
+    .ai-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .ai-spark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255,199,184,.18);
+      color: var(--rose);
+      font-weight: 900;
+    }
+    .prompt { margin: 12px 0; padding: 12px; border-radius: 16px; background: rgba(255,255,255,.09); color: rgba(255,255,255,.78); font-size: 12px; font-weight: 650; }
+    .module { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.13); font-size: 12px; }
+    .module span:last-child { color: rgba(255,255,255,.72); }
+    .phone {
+      position: absolute;
+      z-index: 5;
+      right: 28px;
+      bottom: 30px;
+      width: 220px;
+      padding: 10px;
+      border-radius: 38px;
+      background: #101816;
+      box-shadow: 0 30px 80px rgba(22,33,29,.3);
+      transform: rotate(2.5deg);
+    }
+    .phone-screen {
+      min-height: 420px;
+      border-radius: 29px;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255,199,184,.66), transparent 30%),
+        linear-gradient(180deg, #fff8f2, #eef7eb);
+    }
+    .breathe {
+      width: 122px;
+      height: 122px;
+      display: grid;
+      place-items: center;
+      margin: 36px auto 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #fff 0 32%, var(--rose) 33% 58%, rgba(239,128,111,.32) 59% 100%);
+      font-weight: 900;
+      color: var(--pine);
+    }
+    .booking { padding: 12px; border-radius: 16px; background: rgba(255,255,255,.72); border: 1px solid rgba(22,33,29,.09); font-size: 12px; font-weight: 760; }
+
+    section { padding: 96px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .56fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(42px, 5vw, 72px);
+      font-weight: 300;
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    .section-head p { margin: 0; color: #5c6963; font-size: 16px; }
+
+    .audience-wrap {
+      margin-top: -22px;
+      padding: 14px;
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,250,241,.72), rgba(255,255,255,.36)),
+        linear-gradient(90deg, rgba(220,236,247,.5), rgba(255,199,184,.38));
+      border: 1px solid rgba(255,255,255,.72);
+      box-shadow: 0 24px 70px rgba(20,35,31,.09);
+    }
+    .audience-row {
+      display: grid;
+      grid-template-columns: 1.15fr .95fr .95fr 1.15fr;
+      gap: 14px;
+    }
+    .audience {
+      position: relative;
+      min-height: 188px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid rgba(22,33,29,.1);
+      border-radius: 24px;
+      background: rgba(255,250,241,.84);
+      box-shadow: 0 14px 38px rgba(22,33,29,.06);
+    }
+    .audience::after {
+      content: "";
+      position: absolute;
+      right: -42px;
+      bottom: -54px;
+      width: 138px;
+      height: 138px;
+      border-radius: 50%;
+      background: var(--tint, rgba(220,236,247,.56));
+      opacity: .72;
+    }
+    .audience.featured {
+      grid-row: span 2;
+      min-height: 390px;
+      background:
+        linear-gradient(160deg, rgba(255,250,241,.92), rgba(255,255,255,.56)),
+        var(--tint, rgba(220,236,247,.42));
+    }
+    .audience-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--tint, var(--sky));
+      color: var(--pine);
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.58);
+    }
+    .audience-label {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 860;
+      border: 1px solid rgba(22,33,29,.08);
+    }
+    .audience-body { position: relative; z-index: 1; }
+    .audience b {
+      display: block;
+      margin: 18px 0 8px;
+      font-family: var(--display);
+      font-size: 34px;
+      font-weight: 300;
+      line-height: .95;
+    }
+    .audience span { color: var(--muted); font-size: 14px; font-weight: 650; }
+    .audience-metrics {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .audience-metrics i {
+      font-style: normal;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: #33423d;
+      font-size: 11px;
+      font-weight: 850;
+      border: 1px solid rgba(22,33,29,.08);
+    }
+
+    .dark-band {
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(217,111,95,.18), transparent 44%),
+        linear-gradient(135deg, #081f1c, #173f37 62%, #315747);
+      position: relative;
+    }
+    .dark-band .section-head p { color: rgba(255,255,255,.7); }
+    .bento {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+    }
+    .product-card {
+      min-height: 430px;
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .product-card.light {
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      border-color: rgba(255,255,255,.68);
+    }
+    .tag {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: inherit;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .light .tag { background: var(--sage); }
+    .product-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--display);
+      font-size: 46px;
+      font-weight: 300;
+      line-height: .96;
+    }
+    .product-card p { color: inherit; opacity: .74; max-width: 560px; }
+    .checks { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+    .checks li { display: flex; align-items: center; gap: 10px; font-weight: 760; }
+    .checks li::before { content: ""; width: 10px; height: 10px; flex: 0 0 10px; border-radius: 50%; background: var(--clay); }
+    .light .checks li::before { background: var(--blue); }
+
+    .role-section {
+      background:
+        linear-gradient(180deg, rgba(255,250,241,.88), rgba(248,241,232,.96)),
+        linear-gradient(120deg, rgba(220,236,247,.36), rgba(255,199,184,.28));
+    }
+    .role-header {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 1fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    .role-header p { color: var(--muted); max-width: 560px; margin: 0; font-size: 18px; }
+    .role-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid rgba(22,33,29,.08);
+      border-radius: 999px;
+      background: rgba(255,250,241,.78);
+      box-shadow: 0 16px 44px rgba(20,35,31,.08);
+    }
+    .role-tab {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 860;
+    }
+    .role-tab.active {
+      color: white;
+      background: linear-gradient(135deg, var(--ink), #1f4b42);
+      box-shadow: 0 14px 30px rgba(22,33,29,.18);
+    }
+    .role-stage {
+      display: grid;
+      grid-template-columns: 1.18fr .82fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .journey-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+      padding: 24px;
+      border-radius: 34px;
+      border: 1px solid rgba(22,33,29,.1);
+      background:
+        linear-gradient(135deg, rgba(255,250,241,.95), rgba(255,255,255,.72)),
+        linear-gradient(135deg, rgba(220,236,247,.58), rgba(190,232,212,.42));
+      box-shadow: var(--shadow);
+    }
+    .journey-card::after {
+      content: "";
+      position: absolute;
+      right: -92px;
+      top: -92px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255,199,184,.5);
+    }
+    .journey-title {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .journey-title h3 {
+      margin: 8px 0 8px;
+      max-width: 520px;
+      font-family: var(--display);
+      font-size: clamp(42px, 4.6vw, 68px);
+      font-weight: 300;
+      line-height: .92;
+    }
+    .journey-title p { margin: 0; max-width: 480px; color: var(--muted); }
+    .role-number {
+      flex: 0 0 auto;
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      background: var(--ink);
+      color: white;
+      font-family: var(--display);
+      font-size: 38px;
+      font-weight: 300;
+      box-shadow: 0 18px 42px rgba(22,33,29,.18);
+    }
+    .journey-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .path-card {
+      min-height: 190px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(22,33,29,.08);
+      box-shadow: 0 10px 30px rgba(22,33,29,.06);
+    }
+    .path-card .icon { margin-bottom: 38px; }
+    .path-card b { display: block; margin-bottom: 8px; font-size: 18px; }
+    .path-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .role-side {
+      display: grid;
+      gap: 18px;
+    }
+    .progress-panel, .support-panel {
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(22,33,29,.1);
+      background: rgba(255,250,241,.84);
+      box-shadow: var(--soft-shadow);
+    }
+    .progress-panel { min-height: 344px; }
+    .support-panel {
+      color: white;
+      background:
+        linear-gradient(145deg, rgba(217,111,95,.54), transparent 48%),
+        linear-gradient(145deg, #101615, #183d35);
+      min-height: 198px;
+    }
+    .progress-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+    .ring {
+      width: 142px;
+      height: 142px;
+      display: grid;
+      place-items: center;
+      margin: 4px auto 22px;
+      border-radius: 50%;
+      background: conic-gradient(var(--moss) 0 68%, rgba(22,33,29,.09) 68% 100%);
+    }
+    .ring span {
+      width: 106px;
+      height: 106px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--paper);
+      font-family: var(--display);
+      font-size: 38px;
+    }
+    .mini-list { display: grid; gap: 9px; }
+    .mini-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      color: #46554f;
+      font-size: 13px;
+      font-weight: 760;
+    }
+    .lesson {
+      padding: 16px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(22,33,29,.08);
+      margin-bottom: 12px;
+    }
+    .lesson b { display: block; }
+    .status { display: inline-flex; margin-top: 10px; padding: 5px 8px; border-radius: 999px; background: var(--mint); color: var(--pine); font-size: 12px; font-weight: 900; }
+
+    .studio {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .copy-block {
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,250,241,.84);
+      border: 1px solid rgba(22,33,29,.09);
+      box-shadow: var(--soft-shadow);
+    }
+    .copy-block h2 { margin-bottom: 16px; }
+    .builder-ui {
+      padding: 18px;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #101615, #173a33);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    .builder-ui .prompt { background: rgba(255,255,255,.11); }
+    .builder-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .step-dot { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; background: rgba(255,255,255,.1); font-size: 12px; font-weight: 900; }
+
+    .wellness {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,250,241,.62)),
+        linear-gradient(112deg, rgba(232,222,244,.78), rgba(190,232,212,.7) 54%, rgba(220,236,247,.74));
+    }
+    .wellness::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 210px;
+      width: min(1040px, calc(100% - 56px));
+      height: 360px;
+      transform: translateX(-50%);
+      border-radius: 42px;
+      background:
+        linear-gradient(135deg, rgba(255,250,241,.56), rgba(255,255,255,.2)),
+        linear-gradient(90deg, rgba(8,31,28,.1), transparent);
+      border: 1px solid rgba(255,255,255,.48);
+      pointer-events: none;
+    }
+    .phone-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: .92fr 1.08fr .92fr;
+      gap: 22px;
+      align-items: end;
+      padding-top: 10px;
+    }
+    .phone-card {
+      position: relative;
+      min-height: 604px;
+      padding: 10px;
+      border-radius: 42px;
+      background: linear-gradient(145deg, #101816, #25312e);
+      box-shadow: 0 34px 90px rgba(22,33,29,.28);
+    }
+    .phone-card:nth-child(1) { transform: translateY(30px) rotate(-2deg); }
+    .phone-card:nth-child(2) { min-height: 652px; transform: translateY(-8px); }
+    .phone-card:nth-child(3) { transform: translateY(30px) rotate(2deg); }
+    .phone-card > .mobile-screen {
+      min-height: 584px;
+      padding: 18px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 36%, rgba(255,199,184,.62), transparent 29%),
+        linear-gradient(180deg, #fffaf6, #f7eee9);
+      overflow: hidden;
+    }
+    .phone-card:nth-child(2) > .mobile-screen {
+      min-height: 632px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(190,232,212,.76), transparent 30%),
+        linear-gradient(180deg, #fbfff7, #e8f2df);
+    }
+    .phone-card:nth-child(3) > .mobile-screen {
+      background:
+        radial-gradient(circle at 52% 20%, rgba(216,233,248,.82), transparent 31%),
+        linear-gradient(180deg, #f7fbff, #d8e9f8);
+    }
+    .phone-notch {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      width: 82px;
+      height: 22px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #101816;
+      z-index: 2;
+    }
+    .mobile-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 2px 0 24px;
+      padding: 0 6px;
+      color: rgba(16,22,21,.76);
+      font-size: 12px;
+      font-weight: 860;
+    }
+    .mobile-appbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .mobile-appbar b {
+      display: block;
+      font-family: var(--display);
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .mobile-appbar span { display: block; color: var(--muted); font-size: 12px; font-weight: 760; }
+    .avatar, .mobile-action {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(22,33,29,.08);
+      font-weight: 900;
+    }
+    .calm-orbit {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      display: grid;
+      place-items: center;
+      margin: 34px auto 26px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.94) 0 32%, rgba(255,199,184,.8) 33% 49%, rgba(255,199,184,.28) 50% 68%, transparent 69% 100%);
+      box-shadow: inset 0 0 0 1px rgba(217,111,95,.14);
+    }
+    .calm-orbit::before,
+    .calm-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(217,111,95,.24);
+      border-radius: 50%;
+    }
+    .calm-orbit::after { inset: -10px; border-color: rgba(255,255,255,.6); }
+    .calm-orbit b { position: relative; z-index: 1; font-size: 18px; }
+    .mood-row, .slot-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .mood, .slot {
+      padding: 12px 8px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(22,33,29,.08);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 850;
+      color: #46554f;
+    }
+    .mobile-card-panel {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(22,33,29,.08);
+      box-shadow: 0 10px 26px rgba(22,33,29,.05);
+    }
+    .mobile-card-panel b { display: block; margin-bottom: 4px; }
+    .mobile-card-panel p { margin: 0; color: var(--muted); font-size: 13px; }
+    .counselor-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(22,33,29,.08);
+      box-shadow: 0 10px 28px rgba(22,33,29,.05);
+    }
+    .face {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: var(--rose);
+      font-weight: 900;
+    }
+    .counselor-card:nth-of-type(2) .face { background: var(--sky); }
+    .counselor-card:nth-of-type(3) .face { background: var(--sage); }
+    .rating { color: var(--moss); font-size: 12px; font-weight: 900; }
+    .search-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(22,33,29,.08);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+    }
+    .booking-card {
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(22,33,29,.08);
+      box-shadow: 0 12px 30px rgba(22,33,29,.06);
+    }
+    .calendar-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .day {
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(22,33,29,.08);
+      font-size: 12px;
+      font-weight: 850;
+      color: #46554f;
+    }
+    .day.active { background: var(--ink); color: white; }
+    .confirm-bar {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 16px 34px rgba(22,33,29,.16);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .road {
+      position: relative;
+      min-height: 210px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,250,241,.82);
+      border: 1px solid rgba(22,33,29,.08);
+      box-shadow: var(--soft-shadow);
+    }
+    .road strong { display: block; font-family: var(--display); font-size: 28px; font-weight: 300; line-height: 1; margin: 32px 0 10px; }
+    .road p { margin: 0; color: var(--muted); }
+    .num { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--ink); color: white; font-weight: 900; }
+
+    .cta {
+      padding: 36px;
+      border-radius: 30px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(239,128,111,.86), transparent 42%),
+        linear-gradient(135deg, #101816, #203c34);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .cta p { color: rgba(255,255,255,.72); }
+    .form { display: grid; gap: 12px; }
+    input, select {
+      width: 100%;
+      height: 54px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 14px;
+      background: rgba(255,255,255,.11);
+      color: white;
+      padding: 0 14px;
+      outline: none;
+    }
+    select option { color: var(--ink); }
+    .form .btn { background: var(--rose); color: var(--ink); box-shadow: none; }
+
+    footer { padding: 36px 0 48px; color: var(--muted); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 26px; border-top: 1px solid rgba(22,33,29,.1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .nav-cta { transition: none; }
+      .btn:hover, .nav-cta:hover { transform: none; }
+    }
+    @media (max-width: 980px) {
+      .nav-center, .domain-pill { display: none; }
+      .hero-grid, .bento, .studio, .cta, .role-header, .role-stage { grid-template-columns: 1fr; }
+      .hero-grid { gap: 34px; }
+      .theatre { min-height: 720px; }
+      .browser { width: 100%; }
+      .ai-card { left: 22px; bottom: 44px; }
+      .phone { right: 22px; }
+      .audience-row, .roadmap { grid-template-columns: repeat(2, 1fr); }
+      .role-tabs { grid-template-columns: repeat(2, 1fr); border-radius: 24px; }
+      .journey-grid { grid-template-columns: 1fr; }
+      .phone-row { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 12px; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      .hero { padding-top: 58px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .theatre { min-height: 850px; padding: 16px; border-radius: 24px; }
+      .dash-grid { grid-template-columns: 1fr; }
+      .ai-card { width: calc(100% - 32px); left: 16px; bottom: 304px; }
+      .phone { width: 190px; right: 16px; bottom: 16px; }
+      .audience-row, .roadmap { grid-template-columns: 1fr; }
+      .role-tabs { grid-template-columns: 1fr; }
+      .journey-title { display: block; }
+      .role-number { margin-top: 18px; }
+      section { padding: 68px 0; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">CN</span>
+      <span class="brand-text"><strong>CoolNerdz</strong><span>Coming soon</span></span>
+    </a>
+    <div class="nav-center">
+      <div class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#teachers">AI builder</a>
+        <a href="#wellness">Wellness</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <span class="domain-pill">coolnerdz.com</span>
+      <a class="nav-cta" href="#waitlist">Join waitlist</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="pulse"></span> Building now for early access</span>
+        <h1>A smarter way to learn, grow, and feel supported.</h1>
+        <p class="lead">CoolNerdz is building an AI-powered learning and wellbeing ecosystem for courses, progress tracking, athlete development, calm tools, and counselor-supported care.</p>
+        <div class="actions">
+          <a class="btn" href="#waitlist">Join the waitlist</a>
+          <a class="btn secondary" href="#platform">Explore the platform</a>
+        </div>
+        <div class="micro">
+          <span>Students</span><span>Teachers</span><span>Athletes</span><span>Counselors</span><span>Academies</span>
+        </div>
+      </div>
+
+      <div class="theatre" aria-label="CoolNerdz product interface preview">
+        <div class="browser">
+          <div class="browser-top">
+            <div class="lights"><i></i><i></i><i></i></div>
+            <span class="browser-title">CoolNerdz learning command center</span>
+          </div>
+          <div class="hero-status">
+            <div><b>84%</b>Learners on track</div>
+            <div><b>28</b>Courses published</div>
+            <div><b>156</b>Support moments</div>
+          </div>
+          <div class="dash-grid">
+            <div class="glass-card">
+              <p class="small muted">Course marketplace</p>
+              <h3>Student athlete development</h3>
+              <div class="course-row"><span class="course-icon">01</span><span>Performance mindset</span><span class="bar"><i style="width:82%"></i></span></div>
+              <div class="course-row"><span class="course-icon">02</span><span>Nutrition basics</span><span class="bar"><i style="width:64%"></i></span></div>
+              <div class="course-row"><span class="course-icon">03</span><span>Recovery and calm</span><span class="bar"><i style="width:48%"></i></span></div>
+            </div>
+            <div class="mini-stack">
+              <div class="mini-card"><p class="small muted">AI draft</p><div class="stat">6wk</div><p class="small muted">course outline ready</p></div>
+              <div class="mini-card"><p class="small muted">Next milestone</p><div class="stat">Fri</div><p class="small muted">reflection check-in</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-card">
+          <div class="ai-top"><b>AI course builder</b><span class="ai-spark">✦</span></div>
+          <div class="prompt">Create a 6-week confidence course for beginner learners.</div>
+          <div class="module"><span>Week 1</span><span>Goals and baseline</span></div>
+          <div class="module"><span>Week 2</span><span>Practice routine</span></div>
+          <div class="module"><span>Status</span><span>Teacher review</span></div>
+        </div>
+
+        <div class="phone">
+          <div class="phone-screen">
+            <b>Calm check-in</b>
+            <div class="breathe">Breathe</div>
+            <div class="booking"><b>Tomorrow, 4:30 PM</b><br />Counselor appointment available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="audience-wrap">
+          <div class="audience-row">
+            <div class="audience featured" style="--tint: rgba(220,236,247,.74)">
+              <div class="audience-top"><div class="icon">↗</div><span class="audience-label">Learner path</span></div>
+              <div class="audience-body">
+                <b>Students</b>
+                <span>Follow courses, goals, reflections, and progress without feeling lost.</span>
+                <div class="audience-metrics"><i>Course goals</i><i>Progress map</i><i>Calm check-ins</i></div>
+              </div>
+            </div>
+            <div class="audience" style="--tint: rgba(217,233,209,.8)">
+              <div class="audience-top"><div class="icon">✦</div><span class="audience-label">Creator tools</span></div>
+              <div class="audience-body">
+                <b>Teachers</b>
+                <span>Build course outlines faster, review AI drafts, and manage learners.</span>
+              </div>
+            </div>
+            <div class="audience" style="--tint: rgba(255,199,184,.82)">
+              <div class="audience-top"><div class="icon">◐</div><span class="audience-label">Programs</span></div>
+              <div class="audience-body">
+                <b>Athletes</b>
+                <span>Use structured learning paths for development, mindset, and routines.</span>
+              </div>
+            </div>
+            <div class="audience featured" style="--tint: rgba(232,222,244,.78)">
+              <div class="audience-top"><div class="icon">☉</div><span class="audience-label">Support layer</span></div>
+              <div class="audience-body">
+                <b>Counselors</b>
+                <span>Set up profiles, manage availability, and receive appointment bookings.</span>
+                <div class="audience-metrics"><i>Profiles</i><i>Bookings</i><i>Availability</i></div>
+              </div>
+            </div>
+            <div class="audience" style="--tint: rgba(190,232,212,.78)">
+              <div class="audience-top"><div class="icon">⌁</div><span class="audience-label">Cohorts</span></div>
+              <div class="audience-body">
+                <b>Academies</b>
+                <span>Organize groups, learning paths, and progress milestones in one place.</span>
+              </div>
+            </div>
+            <div class="audience" style="--tint: rgba(255,229,184,.76)">
+              <div class="audience-top"><div class="icon">◆</div><span class="audience-label">Insights</span></div>
+              <div class="audience-body">
+                <b>Organizations</b>
+                <span>See progress, participation, and learner support signals across teams.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-band" id="platform">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Two products, one growth journey.</h2>
+          <p>The LMS is the learning engine. The mobile app is the calm support layer around the learner.</p>
+        </div>
+        <div class="bento">
+          <article class="product-card">
+            <span class="tag">AI-powered LMS</span>
+            <h3>Courses, creation, and progress management.</h3>
+            <p>Sell learning programs, help teachers build course structures faster with AI, and keep student growth visible.</p>
+            <ul class="checks">
+              <li>Course marketplace and publishing</li>
+              <li>AI-generated outlines, modules, and lessons</li>
+              <li>Progress tracking for students and cohorts</li>
+              <li>Athlete learning and development paths</li>
+            </ul>
+          </article>
+          <article class="product-card light">
+            <span class="tag">Mobile wellbeing app</span>
+            <h3>Calm tools and counselor booking.</h3>
+            <p>A mobile-first experience for everyday grounding, appointment booking, and counselor participation.</p>
+            <ul class="checks">
+              <li>Calm sessions and check-ins</li>
+              <li>Counselor profiles and appointment booking</li>
+              <li>Counselor signup and availability tools</li>
+              <li>Support journeys connected to learning</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="role-section">
+      <div class="wrap">
+        <div class="role-header">
+          <div>
+            <h2>Designed around each role.</h2>
+          </div>
+          <p>Each person enters CoolNerdz with a different job to do, so the product experience adapts around their next best action.</p>
+        </div>
+
+        <div class="role-tabs" aria-label="Role tabs">
+          <div class="role-tab active">Student</div>
+          <div class="role-tab">Teacher</div>
+          <div class="role-tab">Athlete</div>
+          <div class="role-tab">Counselor</div>
+        </div>
+
+        <div class="role-stage" style="margin-top:18px">
+          <div class="journey-card">
+            <div class="journey-title">
+              <div>
+                <span class="tag" style="background:var(--sky)">Student journey</span>
+                <h3>From course discovery to calm progress.</h3>
+                <p>A learner can choose a course, follow milestones, reflect on progress, and access support when they need it.</p>
+              </div>
+              <div class="role-number">01</div>
+            </div>
+
+            <div class="journey-grid">
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sky)">↗</div>
+                <b>Choose path</b>
+                <p>Browse courses and programs matched to goals.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--sage)">✓</div>
+                <b>Track momentum</b>
+                <p>See weekly tasks, milestones, and completion.</p>
+              </div>
+              <div class="path-card">
+                <div class="icon" style="--tint:var(--rose)">◌</div>
+                <b>Get support</b>
+                <p>Start a calm reset or book a counselor session.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-side">
+            <div class="progress-panel">
+              <div class="progress-top">
+                <div>
+                  <b>Today’s progress</b>
+                  <p class="muted" style="margin:4px 0 0">Student dashboard preview</p>
+                </div>
+                <span class="status">On track</span>
+              </div>
+              <div class="ring"><span>68%</span></div>
+              <div class="mini-list">
+                <div class="mini-row"><span>Next lesson</span><span>Practice and feedback</span></div>
+                <div class="mini-row"><span>Goal</span><span>3 days left</span></div>
+                <div class="mini-row"><span>Support</span><span>Calm check-in ready</span></div>
+              </div>
+            </div>
+
+            <div class="support-panel">
+              <span class="tag">Support moment</span>
+              <h3 style="margin:0 0 10px;font-family:var(--display);font-weight:300;font-size:38px;line-height:.95">Built-in care, not an extra app.</h3>
+              <p style="margin:0;color:rgba(255,255,255,.72)">The wellness layer appears when the learner needs grounding, guidance, or a counselor booking.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="teachers">
+      <div class="wrap studio">
+        <div class="copy-block">
+          <span class="tag" style="background:var(--rose)">AI course builder</span>
+          <h2>Teachers stay in control. AI gets the first draft moving.</h2>
+          <p class="lead">The product should feel empowering, not automatic. AI starts the outline; teachers shape, approve, and publish.</p>
+        </div>
+        <div class="builder-ui">
+          <b>Generate course structure</b>
+          <div class="prompt">Create a 6-week beginner course for confident public speaking with weekly assignments and progress checkpoints.</div>
+          <div class="builder-row"><span class="step-dot">1</span><span>Audience, goals, and baseline confidence</span><span class="status">Ready</span></div>
+          <div class="builder-row"><span class="step-dot">2</span><span>Voice, posture, and daily practice routine</span><span class="status">Edit</span></div>
+          <div class="builder-row"><span class="step-dot">3</span><span>Feedback loop and milestone review</span><span class="status">Draft</span></div>
+          <div class="builder-row"><span class="step-dot">4</span><span>Final presentation and learner reflection</span><span class="status">Draft</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wellness" id="wellness">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Mobile support that feels calm, useful, and real.</h2>
+          <p>The app preview should show actual actions: reset, find a counselor, and book an appointment.</p>
+        </div>
+        <div class="phone-row">
+          <div class="phone-card">
+            <div class="phone-notch"></div>
+            <div class="mobile-screen">
+              <div class="mobile-status"><span>9:41</span><span>● ● ●</span></div>
+              <div class="mobile-appbar">
+                <div><b>Calm</b><span>2 minutes to reset</span></div>
+                <div class="mobile-action">♪</div>
+              </div>
+              <div class="calm-orbit"><b>Breathe</b></div>
+              <div class="mobile-card-panel">
+                <b>Before your next lesson</b>
+                <p>Slow breathing, mood check-in, and one small intention.</p>
+              </div>
+              <div class="mood-row">
+                <div class="mood">Calm</div>
+                <div class="mood">Focus</div>
+                <div class="mood">Reset</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-card">
+            <div class="phone-notch"></div>
+            <div class="mobile-screen">
+              <div class="mobile-status"><span>9:41</span><span>● ● ●</span></div>
+              <div class="mobile-appbar">
+                <div><b>Counselors</b><span>Available support near you</span></div>
+                <div class="avatar">CN</div>
+              </div>
+              <div class="search-pill">⌕ Search stress, confidence, study pressure</div>
+              <div class="counselor-card">
+                <div class="face">DS</div>
+                <div><b>Dr. Sana</b><p>Study stress and performance pressure</p></div>
+                <span class="rating">4.9</span>
+              </div>
+              <div class="counselor-card">
+                <div class="face">MA</div>
+                <div><b>Mr. Ahmed</b><p>Career guidance and learner support</p></div>
+                <span class="rating">4.8</span>
+              </div>
+              <div class="counselor-card">
+                <div class="face">AF</div>
+                <div><b>Aisha Fatima</b><p>Confidence, routines, and motivation</p></div>
+                <span class="rating">5.0</span>
+              </div>
+              <div class="mobile-card-panel">
+                <b>Next available</b>
+                <p>Today at 5:00 PM · Video appointment</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-card">
+            <div class="phone-notch"></div>
+            <div class="mobile-screen">
+              <div class="mobile-status"><span>9:41</span><span>● ● ●</span></div>
+              <div class="mobile-appbar">
+                <div><b>Booking</b><span>Confirm your session</span></div>
+                <div class="mobile-action">✓</div>
+              </div>
+              <div class="booking-card">
+                <b>Dr. Sana</b>
+                <p>Stress, confidence, and study pressure</p>
+                <div class="calendar-strip">
+                  <div class="day">Mon<br>12</div>
+                  <div class="day active">Tue<br>13</div>
+                  <div class="day">Wed<br>14</div>
+                  <div class="day">Thu<br>15</div>
+                  <div class="day">Fri<br>16</div>
+                </div>
+                <div class="slot-row">
+                  <div class="slot">3:00</div>
+                  <div class="slot">4:30</div>
+                  <div class="slot">5:00</div>
+                </div>
+              </div>
+              <div class="mobile-card-panel">
+                <b>Add a note</b>
+                <p>I want help managing pressure before exams.</p>
+              </div>
+              <div class="confirm-bar"><span>Tue, 4:30 PM</span><span>Confirm</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>A coming soon page with a believable build path.</h2>
+          <p>Clear roadmap content gives the client a stronger story than simply saying “launching soon.”</p>
+        </div>
+        <div class="roadmap">
+          <div class="road"><span class="num">1</span><strong>Now</strong><p>LMS foundation, course marketplace, and early interface flows.</p></div>
+          <div class="road"><span class="num">2</span><strong>Next</strong><p>AI course creation, teacher review, and progress dashboards.</p></div>
+          <div class="road"><span class="num">3</span><strong>Then</strong><p>Calm tools, counselor profiles, and appointment booking.</p></div>
+          <div class="road"><span class="num">4</span><strong>Later</strong><p>Community, deeper analytics, and expanded learner programs.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="waitlist">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <span class="tag">Early access</span>
+            <h2>Be first to see CoolNerdz when it opens.</h2>
+            <p>Collect interest from learners, teachers, athletes, counselors, and organizations before launch at coolnerdz.com.</p>
+          </div>
+          <form class="form">
+            <input type="email" placeholder="Email address" />
+            <select>
+              <option>Student</option>
+              <option>Teacher</option>
+              <option>Athlete</option>
+              <option>Counselor</option>
+              <option>Organization</option>
+            </select>
+            <button class="btn" type="button">Join waitlist</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <a class="brand" href="#"><span class="brand-mark">CN</span><span>CoolNerdz</span></a>
+      <span>coolnerdz.com · Built for learning, growth, and care.</span>
+    </div>
+  </footer>
+</body>
+</html>
