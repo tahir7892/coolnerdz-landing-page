@@ -1747,17 +1747,19 @@
             <h2>Be first to see CoolNerdz when it opens.</h2>
             <p>Collect interest from learners, teachers, athletes, counselors, and organizations before launch at coolnerdz.com.</p>
           </div>
-          <form class="form">
-            <input type="email" placeholder="Email address">
-            <select>
-              <option>Student</option>
-              <option>Teacher</option>
-              <option>Athlete</option>
-              <option>Counselor</option>
-              <option>Organization</option>
+          <form class="form" id="waitlist-form">
+            <input type="email" id="waitlist-email" placeholder="Email address" required>
+            <select id="waitlist-role" required>
+              <option value="" disabled selected>Select a role...</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Athlete">Athlete</option>
+              <option value="Counselor">Counselor</option>
+              <option value="Organization">Organization</option>
             </select>
             <button class="btn" type="submit">Join waitlist</button>
           </form>
+          <div id="waitlist-message" style="display: none; margin-top: 15px; padding: 12px; border-radius: 8px; font-weight: 600; text-align: center;"></div>
         </div>
       </div>
     </section>
@@ -1826,6 +1828,76 @@
       });
       
       sections.forEach(section => observer.observe(section));
+    });
+
+    // Waitlist Form Handler
+    document.addEventListener('DOMContentLoaded', () => {
+      const waitlistForm = document.getElementById('waitlist-form');
+      const waitlistMessage = document.getElementById('waitlist-message');
+      let messageTimeout;
+
+      if (waitlistForm) {
+        waitlistForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const emailInput = document.getElementById('waitlist-email');
+          const roleSelect = document.getElementById('waitlist-role');
+          
+          const email = emailInput.value.trim();
+          const role = roleSelect.value;
+
+          // Clear previous messages
+          waitlistMessage.style.display = 'none';
+          waitlistMessage.className = '';
+
+          // Validate
+          if (!email || !role) {
+            showMessage('Please provide a valid email and select a role.', 'error');
+            return;
+          }
+
+          // Send to backend
+          fetch('/api/waitlist', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, role })
+          })
+          .then(async (response) => {
+            const data = await response.json();
+            if (response.ok) {
+              showMessage(data.message || 'You have successfully joined the waitlist!', 'success');
+              waitlistForm.reset();
+            } else {
+              showMessage(data.error || 'An error occurred. Please try again later.', 'error');
+            }
+          })
+          .catch((err) => {
+            console.error('Error sending waitlist entry:', err);
+            showMessage('A network error occurred. Please try again later.', 'error');
+          });
+        });
+      }
+
+      function showMessage(msg, type) {
+        waitlistMessage.textContent = msg;
+        waitlistMessage.style.display = 'block';
+        if (type === 'success') {
+          waitlistMessage.style.backgroundColor = '#bee8d4'; // var(--mint)
+          waitlistMessage.style.color = '#092d29'; // var(--pine)
+          waitlistMessage.style.border = '1px solid #70bea0';
+        } else {
+          waitlistMessage.style.backgroundColor = '#ffc7b8'; // var(--rose)
+          waitlistMessage.style.color = '#101615'; // var(--ink)
+          waitlistMessage.style.border = '1px solid #d96f5f';
+        }
+        
+        clearTimeout(messageTimeout);
+        messageTimeout = setTimeout(() => {
+          waitlistMessage.style.display = 'none';
+        }, 3000);
+      }
     });
   </script>
 </body>
