@@ -1755,7 +1755,7 @@
             <h2>Be first to see CoolNerdz when it opens.</h2>
             <p>Collect interest from learners, teachers, athletes, counselors, and organizations before launch at coolnerdz.com.</p>
           </div>
-          <form class="form" id="waitlist-form">
+          <form class="form" id="waitlist-form" onsubmit="return window.submitWaitlist ? window.submitWaitlist(event) : false">
             <input type="email" id="waitlist-email" placeholder="Email address" required>
             <select id="waitlist-role" required>
               <option value="" disabled selected>Select a role...</option>
@@ -1766,8 +1766,8 @@
               <option value="Organization">Organization</option>
             </select>
             <button class="btn" type="submit">Join waitlist</button>
+            <div id="waitlist-message" aria-live="polite"></div>
           </form>
-          <div id="waitlist-message"></div>
         </div>
       </div>
     </section>
@@ -1838,16 +1838,16 @@
       sections.forEach(section => observer.observe(section));
     });
 
-    // Waitlist Form Handler
-    document.addEventListener('DOMContentLoaded', () => {
+    let waitlistMessageTimeout;
+
+    window.submitWaitlist = function submitWaitlist(e) {
+      e.preventDefault();
+
       const waitlistForm = document.getElementById('waitlist-form');
       const waitlistMessage = document.getElementById('waitlist-message');
-      let messageTimeout;
+      const submitButton = waitlistForm ? waitlistForm.querySelector('button[type="submit"]') : null;
 
-      if (waitlistForm) {
-        waitlistForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-
+      if (waitlistForm && waitlistMessage) {
           const emailInput = document.getElementById('waitlist-email');
           const roleSelect = document.getElementById('waitlist-role');
           
@@ -1861,7 +1861,12 @@
           // Validate
           if (!email || !role) {
             showMessage('Please provide a valid email and select a role.', 'error');
-            return;
+            return false;
+          }
+
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Joining...';
           }
 
           // Send to backend
@@ -1884,8 +1889,13 @@
           .catch((err) => {
             console.error('Error sending waitlist entry:', err);
             showMessage('A network error occurred. Please try again later.', 'error');
+          })
+          .finally(() => {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = 'Join waitlist';
+            }
           });
-        });
       }
 
       function showMessage(msg, type) {
@@ -1901,12 +1911,14 @@
           waitlistMessage.style.border = '1px solid #d96f5f';
         }
         
-        clearTimeout(messageTimeout);
-        messageTimeout = setTimeout(() => {
+        clearTimeout(waitlistMessageTimeout);
+        waitlistMessageTimeout = setTimeout(() => {
           waitlistMessage.style.display = 'none';
         }, 3000);
       }
-    });
+
+      return false;
+    };
   </script>
 </body>
 </html>
