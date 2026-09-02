@@ -62,8 +62,8 @@ jobs:
             set -e
             cd /opt/coolnerdz-landing-page
             npm install --omit=dev
-            pm2 describe coolnerdz-waitlist > /dev/null 2>&1 \
-              && pm2 restart coolnerdz-waitlist \
-              || pm2 start server.js --name coolnerdz-waitlist
-            pm2 save
+            npx pm2 describe coolnerdz-waitlist > /dev/null 2>&1 \
+              && PORT=3003 npx pm2 restart coolnerdz-waitlist --update-env \
+              || PORT=3003 npx pm2 start server.js --name coolnerdz-waitlist
+            npx pm2 save
           '
