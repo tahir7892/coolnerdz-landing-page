@@ -44,5 +44,26 @@ jobs:
           rsync -avz --delete \
             --exclude='.git' \
             --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='*.sqlite' \
+            --exclude='*.sqlite3' \
             -e "ssh -p ${SSH_PORT:-22}" \
             ./ "$SSH_USER@$SSH_HOST:/opt/coolnerdz-landing-page/"
+
+      - name: Install dependencies and restart app
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" '
+            set -e
+            cd /opt/coolnerdz-landing-page
+            npm install --omit=dev
+            pm2 describe coolnerdz-waitlist > /dev/null 2>&1 \
+              && pm2 restart coolnerdz-waitlist \
+              || pm2 start server.js --name coolnerdz-waitlist
+            pm2 save
+          '

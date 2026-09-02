@@ -25,3 +25,4 @@ build/
 .env.test.local
 .env.production.local
 *.sqlite
+*.sqlite3
