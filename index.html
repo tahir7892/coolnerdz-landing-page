@@ -1755,9 +1755,9 @@
             <h2>Be first to see CoolNerdz when it opens.</h2>
             <p>Collect interest from learners, teachers, athletes, counselors, and organizations before launch at coolnerdz.com.</p>
           </div>
-          <form class="form" id="waitlist-form" onsubmit="return window.submitWaitlist ? window.submitWaitlist(event) : false">
-            <input type="email" id="waitlist-email" placeholder="Email address" required>
-            <select id="waitlist-role" required>
+          <form class="form" id="waitlist-form" action="javascript:void(0)" method="post" novalidate>
+            <input type="email" id="waitlist-email" name="email" placeholder="Email address" required>
+            <select id="waitlist-role" name="role" required>
               <option value="" disabled selected>Select a role...</option>
               <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
@@ -1839,9 +1839,28 @@
     });
 
     let waitlistMessageTimeout;
+    let waitlistIsSubmitting = false;
 
-    window.submitWaitlist = function submitWaitlist(e) {
-      e.preventDefault();
+    function attachWaitlistHandler() {
+      const waitlistForm = document.getElementById('waitlist-form');
+
+      if (!waitlistForm || waitlistForm.dataset.bound === 'true') {
+        return;
+      }
+
+      waitlistForm.dataset.bound = 'true';
+      waitlistForm.addEventListener('submit', submitWaitlist);
+    }
+
+    async function submitWaitlist(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      if (waitlistIsSubmitting) {
+        return false;
+      }
 
       const waitlistForm = document.getElementById('waitlist-form');
       const waitlistMessage = document.getElementById('waitlist-message');
@@ -1864,20 +1883,21 @@
             return false;
           }
 
+          waitlistIsSubmitting = true;
+
           if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
           }
 
-          // Send to backend
-          fetch('/api/waitlist', {
+          try {
+            const response = await fetch('/api/waitlist', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, role })
-          })
-          .then(async (response) => {
+            });
             const data = await response.json();
             if (response.ok) {
               showMessage(data.message || 'You have successfully joined the waitlist!', 'success');
@@ -1885,17 +1905,16 @@
             } else {
               showMessage(data.error || 'An error occurred. Please try again later.', 'error');
             }
-          })
-          .catch((err) => {
+          } catch (err) {
             console.error('Error sending waitlist entry:', err);
             showMessage('A network error occurred. Please try again later.', 'error');
-          })
-          .finally(() => {
+          } finally {
+            waitlistIsSubmitting = false;
             if (submitButton) {
               submitButton.disabled = false;
               submitButton.textContent = 'Join waitlist';
             }
-          });
+          }
       }
 
       function showMessage(msg, type) {
@@ -1918,7 +1937,11 @@
       }
 
       return false;
-    };
+    }
+
+    window.submitWaitlist = submitWaitlist;
+    attachWaitlistHandler();
+    document.addEventListener('DOMContentLoaded', attachWaitlistHandler);
   </script>
 </body>
 </html>
