@@ -1204,6 +1204,14 @@
     .support-title { margin: 0 0 10px; font-family: var(--display); font-weight: 300; font-size: 38px; line-height: .95; }
     .support-desc { margin: 0; color: rgba(255,255,255,.72); }
 
+    #waitlist-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -1759,7 +1767,7 @@
             </select>
             <button class="btn" type="submit">Join waitlist</button>
           </form>
-          <div id="waitlist-message" style="display: none; margin-top: 15px; padding: 12px; border-radius: 8px; font-weight: 600; text-align: center;"></div>
+          <div id="waitlist-message"></div>
         </div>
       </div>
     </section>
