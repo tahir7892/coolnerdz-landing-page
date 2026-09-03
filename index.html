@@ -174,8 +174,7 @@
 
     .hero {
       position: relative;
-      padding: 96px 0 70px;
-      min-height: calc(100vh - 76px);
+      padding: 64px 0 24px;
       display: grid;
       align-items: center;
     }
@@ -423,7 +422,7 @@
     }
     .booking { padding: 12px; border-radius: 16px; background: rgba(255,255,255,.72); border: 1px solid rgba(22,33,29,.09); font-size: 12px; font-weight: 760; }
 
-    section { padding: 96px 0; }
+    section { padding: 48px 0; }
     .section-head {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(280px, .56fr);
@@ -663,6 +662,15 @@
       gap: 18px;
       align-items: stretch;
       animation: slideUp 0.4s ease-out;
+    }
+    .role-stage.reverse {
+      grid-template-columns: .82fr 1.18fr;
+    }
+    .role-stage.reverse .journey-card {
+      order: 2;
+    }
+    .role-stage.reverse .role-side {
+      order: 1;
     }
     .role-stage.hidden {
       display: none;
@@ -1151,7 +1159,8 @@
     }
     @media (max-width: 980px) {
       .nav-center, .domain-pill { display: none; }
-      .hero-grid, .bento, .studio, .cta, .role-header, .role-stage { grid-template-columns: 1fr; }
+      .hero-grid, .bento, .studio, .cta, .role-header, .role-stage, .role-stage.reverse { grid-template-columns: 1fr; }
+      .role-stage.reverse .journey-card, .role-stage.reverse .role-side { order: 0; }
       .hero-grid { gap: 34px; }
       .theatre { min-height: 720px; }
       .browser { width: 100%; }
@@ -1176,7 +1185,7 @@
       .role-tabs { grid-template-columns: 1fr; }
       .journey-title { display: block; }
       .role-number { margin-top: 18px; }
-      section { padding: 68px 0; }
+      section { padding: 32px 0; }
       .footer-row { flex-direction: column; align-items: flex-start; }
     }
 
@@ -1453,7 +1462,7 @@
           </div>
         </div>
 
-        <div id="stage-teacher" class="role-stage hidden mt-18">
+        <div id="stage-teacher" class="role-stage reverse hidden mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
@@ -1563,7 +1572,7 @@
           </div>
         </div>
 
-        <div id="stage-counselor" class="role-stage hidden mt-18">
+        <div id="stage-counselor" class="role-stage reverse hidden mt-18">
           <div class="journey-card">
             <div class="journey-title">
               <div>
