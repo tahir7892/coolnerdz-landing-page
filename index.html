@@ -34,6 +34,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      padding-top: 90px;
       background:
         linear-gradient(112deg, rgba(220,236,247,.76), transparent 34%),
         linear-gradient(248deg, rgba(255,199,184,.62), transparent 32%),
@@ -66,8 +67,10 @@
     .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
     .nav {
-      position: sticky;
+      position: absolute;
       top: 18px;
+      left: 0;
+      right: 0;
       z-index: 20;
       width: min(1100px, calc(100% - 32px));
       margin: 18px auto 0;
@@ -194,6 +197,10 @@
       grid-template-columns: minmax(0, .88fr) minmax(560px, 1.12fr);
       gap: 54px;
       align-items: center;
+
+    }
+    .hero h2{
+      line-height: 72px;
     }
     .eyebrow {
       display: inline-flex;
@@ -204,6 +211,7 @@
       border-radius: 999px;
       background: rgba(255, 255, 255, .72);
       color: var(--moss);
+      margin-bottom: 12px;
       font-size: 13px;
       font-weight: 820;
       box-shadow: 0 10px 30px rgba(22,33,29,.06);
@@ -426,7 +434,7 @@
     .section-head {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(280px, .56fr);
-      gap: 34px;
+      gap: 30px;
       align-items: end;
       margin-bottom: 28px;
     }
@@ -438,7 +446,6 @@
       line-height: .92;
       letter-spacing: 0;
     }
-    .section-head p { margin: 0; color: #5c6963; font-size: 16px; }
 
     .audience-wrap {
       margin-top: -22px;
@@ -556,6 +563,38 @@
       position: relative;
     }
     .dark-band .section-head p { color: rgba(255,255,255,.7); }
+    .marquee-wrap {
+      overflow: hidden;
+      margin-bottom: 13px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 11s linear infinite;
+    }
+    .marquee-track span {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      white-space: nowrap;
+      padding-right: 64px;
+      color: rgba(224, 228, 226, 0.7);
+      font-size: 19px;
+      letter-spacing: .01em;
+    }
+    .marquee-track span::after {
+      color: rgba(255,199,184,.7);
+      font-size: 14px;
+    }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
     .bento {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
@@ -574,7 +613,7 @@
     }
     .product-card:hover { transform: translateY(-8px); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 30px 80px rgba(0,0,0,0.3); }
     .product-card.light {
-      background: rgba(255,255,255,.92);
+      background: rgba(253, 251, 253, 0.781);
       color: var(--ink);
       border-color: rgba(255,255,255,.68);
     }
@@ -614,7 +653,7 @@
       align-items: end;
       margin-bottom: 28px;
     }
-    .role-header p { color: var(--muted); max-width: 560px; margin: 0; font-size: 18px; }
+    .role-header p { color: var(--muted); max-width: 560px; margin: 0; font-size: 19px; }
     .role-tabs {
       position: relative;
       display: grid;
@@ -831,7 +870,12 @@
       transition: transform 0.3s ease;
     }
     .copy-block:hover { transform: translateY(-4px); }
-    .copy-block h2 { margin-bottom: 16px; }
+    .copy-block h2 { 
+      margin-bottom: 16px; 
+      font-size: 60px;
+      line-height: 69px;
+
+    }
     .builder-ui {
       padding: 18px;
       border-radius: 30px;
@@ -1001,7 +1045,7 @@
       font-size: 12px;
       font-weight: 850;
       color: #46554f;
-    }
+    } 
     .mobile-card-panel {
       margin-top: 12px;
       padding: 14px;
@@ -1088,6 +1132,53 @@
       box-shadow: 0 16px 34px rgba(22,33,29,.16);
     }
 
+.section-head p {
+    max-width: 760px;
+    margin: 18px auto 0;
+
+    font-size: clamp(17px, 1.4vw, 20px);
+    line-height: 1.75;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+
+    color: #667085;
+
+    text-align: center;
+    text-wrap: balance;
+
+    font-family: inherit;
+
+    position: relative;
+    z-index: 1;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    transition: all 0.35s ease;
+}
+
+.section-head p::after {
+    content: "";
+    display: block;
+
+    width: 55px;
+    height: 2px;
+
+    margin: 22px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #6366f1,
+        #8b5cf6,
+        transparent
+    );
+
+    border-radius: 999px;
+
+    opacity: 0.8;
+}
+
     .roadmap {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1095,16 +1186,46 @@
     }
     .road {
       position: relative;
+      overflow: hidden;
       min-height: 210px;
-      padding: 18px;
+      padding: 20px;
       border-radius: 24px;
-      background: rgba(255,250,241,.82);
-      border: 1px solid rgba(22,33,29,.08);
+      background:
+        linear-gradient(160deg, rgba(255,250,241,.95), rgba(255,255,255,.6)),
+        var(--tint, rgba(220,236,247,.4));
+      border: 1px solid rgba(255,255,255,.6);
       box-shadow: var(--soft-shadow);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
     }
-    .road strong { display: block; font-family: var(--display); font-size: 28px; font-weight: 300; line-height: 1; margin: 32px 0 10px; }
-    .road p { margin: 0; color: var(--muted); }
-    .num { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--ink); color: white; font-weight: 900; }
+    .road:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 60px rgba(20,35,31,.16), inset 0 1px 0 rgba(255,255,255,1); z-index: 2; }
+    .road::after {
+      content: "";
+      position: absolute;
+      right: -38px;
+      bottom: -48px;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      background: var(--tint, rgba(220,236,247,.6));
+      opacity: .65;
+    }
+    .road strong { position: relative; z-index: 1; display: block; font-family: var(--display); font-size: 28px; font-weight: 300; line-height: 1; margin: 32px 0 10px; }
+    .road p { position: relative; z-index: 1; margin: 0; color: var(--muted); }
+    .num {
+      position: absolute;
+      z-index: 2;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--tint, var(--sky));
+      color: var(--pine);
+      font-weight: 900;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+    }
 
     .cta {
       padding: 36px;
@@ -1146,7 +1267,29 @@
       padding-right: 44px;
       cursor: pointer;
     }
-    select option { color: var(--ink); }
+select:hover {
+  border-color: rgba(134, 239, 172, 0.45);
+  background-color: rgba(134, 239, 172, 0.08);
+}
+
+select:focus {
+  border-color: rgba(134, 239, 172, 0.55);
+  background-color: rgba(134, 239, 172, 0.12);
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.08);
+}
+
+
+select option {
+  background: #10231a;
+  color: #ecfdf5;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+select option:checked {
+  background: #0e3b1fd7;
+  color: #f8f4f4;
+}
     .form .btn { background: var(--rose); color: var(--ink); box-shadow: none; font-weight: 800; font-size: 15px; }
 
     footer { padding: 36px 0 48px; color: var(--muted); }
@@ -1247,7 +1390,7 @@
     <div class="wrap hero-grid">
       <div>
         <span class="eyebrow"><span class="pulse"></span> Building now for early access</span>
-        <h1>A smarter way to learn, grow, and feel supported.</h1>
+        <h2>A smarter way to learn, grow, and feel supported.</h2>
         <p class="lead">CoolNerdz is building an AI-powered learning and wellbeing ecosystem for courses, progress tracking, athlete development, calm tools, and counselor-supported care.</p>
         <div class="actions">
           <a class="btn" href="#waitlist">Join the waitlist</a>
@@ -1361,7 +1504,12 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Two products, one growth journey.</h2>
-          <p>The LMS is the learning engine. The mobile app is the calm support layer around the learner.</p>
+          <div class="marquee-wrap">
+            <div class="marquee-track">
+              <span>The LMS is the learning engine. The mobile app is the calm support layer around the learner.</span>
+              <span aria-hidden="true">The LMS is the learning engine. The mobile app is the calm support layer around the learner.</span>
+            </div>
+          </div>
         </div>
         <div class="bento">
           <article class="product-card">
