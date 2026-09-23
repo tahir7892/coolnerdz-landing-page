@@ -2,25 +2,34 @@
 
 Hi there,
 
-Thanks for joining the CoolNerdz waitlist. Your spot is confirmed.
+Thanks for joining us early. Your spot is saved, and you'll be among the first in when the doors open.
 
-We're building CoolNerdz as a smarter way to learn, grow, and feel supported: an AI-powered learning and wellbeing platform for courses, progress tracking, athlete development, calm tools, and counselor-supported care. We're glad you're part of it from the start.
+We're building CoolNerdz as a smarter way to learn, grow, and feel supported: one AI-powered home for learning and wellbeing. We're really glad you're part of it from the start.
 
-YOUR WAITLIST REGISTRATION
+YOUR EARLY ACCESS PASS (CONFIRMED)
 Email:      {{ entry.email }}
 Joining as: {{ entry.role }}
+Joined:     {{ entry.created_at|date:"M j, Y" }}
+
+WHAT YOU'RE GETTING EARLY ACCESS TO
+- Smart courses: AI-powered lessons that meet you where you are.
+- Progress tracking: see growth clearly, week by week and goal by goal.
+- Athlete development: mindset, focus, and recovery for peak performance.
+- Calm & care: calm tools and counselor-supported care, built in.
 
 WHAT HAPPENS NEXT
-01  We'll email you as soon as early access to CoolNerdz opens.
-02  You'll be among the first {{ entry.role|lower }}s to explore the platform.
-03  No action needed for now. There's nothing else to set up.
+1. Sit tight. No action needed for now. There's nothing else to set up.
+2. Watch your inbox. We'll email you the moment early access to CoolNerdz opens.
+3. Get in first. You'll be among the first {{ entry.role|lower }}s to explore the platform.
 
 Visit {{ site_url }}
+
+Know someone who'd love this? Forward them this email.
 
 See you soon,
 The CoolNerdz team
 
 --
-{{ site_domain }} · Built for learning, growth, and care.
+CoolNerdz · Built for learning, growth, and care · {{ site_domain }}
 You're receiving this because this address joined the CoolNerdz waitlist at {{ site_domain }}. If that wasn't you, you can safely ignore this email.
 {% endautoescape %}

@@ -1,55 +1,180 @@
 {% extends "emails/base_email.html" %}
 
 {% block title %}Welcome to CoolNerdz{% endblock %}
-{% block preheader %}You're officially on the CoolNerdz waitlist. We'll let you know as soon as early access opens.{% endblock %}
+{% block preheader %}Your early access spot is confirmed. Here's what's coming and what happens next.{% endblock %}
+
+{% block hero_icon %}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:22px; border-collapse:separate;">
+  <tr>
+    <td width="52" height="52" align="center" valign="middle" bgcolor="#bee8d4" style="width:52px; height:52px; border-radius:999px; background-color:#bee8d4; color:#092d29; font-family:Arial,Helvetica,sans-serif; font-size:26px; line-height:52px; font-weight:700;">&#10003;</td>
+  </tr>
+</table>
+{% endblock %}
 {% block eyebrow %}Early access &middot; Confirmed{% endblock %}
 {% block hero_title %}Welcome to CoolNerdz.<br>You're on the list.{% endblock %}
-{% block hero_lead %}Thanks for joining us early. Your spot on the waitlist is confirmed.{% endblock %}
+{% block hero_lead %}Thanks for joining us early. Your spot is saved, and you'll be among the first in when the doors open.{% endblock %}
 
 {% block content %}
-  <p style="margin:0 0 16px 0;">Hi there,</p>
-  <p style="margin:0 0 22px 0;">We're building CoolNerdz as a smarter way to learn, grow, and feel supported: an AI-powered learning and wellbeing platform for courses, progress tracking, athlete development, calm tools, and counselor-supported care. We're glad you're part of it from the start.</p>
+  <p style="margin:0 0 14px 0; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:19px; line-height:26px; font-weight:600; color:#101615;">Hi there,</p>
+  <p style="margin:0 0 30px 0;">We're building CoolNerdz as a smarter way to learn, grow, and feel supported: one AI-powered home for learning and wellbeing. We're really glad you're part of it from the start.</p>
 
-  <!-- Confirmation details -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#d9e9d1" style="background-color:#d9e9d1; border-radius:16px;">
+  <!-- Early access pass -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef5ea" style="background-color:#eef5ea; border:1px solid #cfe0c6; border-radius:20px; border-collapse:separate;">
     <tr>
-      <td style="padding:18px 22px;">
-        <p style="margin:0 0 10px 0; font-size:12px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:#21483f;">Your waitlist registration</p>
+      <td style="padding:18px 24px 16px 24px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td class="stack" width="50%" valign="top" style="padding:4px 0; font-size:14px; color:#62706a;">Email<br><strong style="color:#101615; word-break:break-all;">{{ entry.email }}</strong></td>
-            <td class="stack" width="50%" valign="top" style="padding:4px 0; font-size:14px; color:#62706a;">Joining as<br><strong style="color:#101615;">{{ entry.role }}</strong></td>
+            <td valign="middle" style="font-family:'Inter',Arial,Helvetica,sans-serif; font-size:11px; line-height:14px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:#21483f;">Your early access pass</td>
+            <td align="right" valign="middle">
+              <span style="display:inline-block; padding:4px 10px; border-radius:999px; background-color:#092d29; color:#bee8d4; font-size:11px; line-height:14px; font-weight:700; letter-spacing:.4px;">&#9679;&nbsp;Confirmed</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:0 24px;"><div style="border-top:2px dashed #c2d6b8; height:0; line-height:0; font-size:0;">&nbsp;</div></td>
+    </tr>
+    <tr>
+      <td style="padding:16px 24px 20px 24px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="stack stack-gap" width="46%" valign="top" style="padding-right:12px;">
+              <div style="font-size:12px; line-height:16px; font-weight:600; color:#62706a;">Email</div>
+              <div style="margin-top:4px; font-size:15px; line-height:21px; font-weight:700; color:#101615; word-break:break-all;">{{ entry.email }}</div>
+            </td>
+            <td class="stack stack-gap" width="27%" valign="top" style="padding-right:12px;">
+              <div style="font-size:12px; line-height:16px; font-weight:600; color:#62706a;">Joining as</div>
+              <div style="margin-top:4px;"><span style="display:inline-block; padding:2px 10px; border-radius:999px; background-color:#bee8d4; color:#092d29; font-size:14px; line-height:21px; font-weight:700;">{{ entry.role }}</span></div>
+            </td>
+            <td class="stack" width="27%" valign="top">
+              <div style="font-size:12px; line-height:16px; font-weight:600; color:#62706a;">Joined</div>
+              <div style="margin-top:4px; font-size:15px; line-height:21px; font-weight:700; color:#101615;">{{ entry.created_at|date:"M j, Y" }}</div>
+            </td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
 
-  <h2 style="margin:30px 0 12px 0; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:20px; line-height:26px; color:#101615;">What happens next</h2>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <!-- Made for your role -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;">
     <tr>
-      <td width="34" valign="top" style="padding:4px 0;"><span style="display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:8px; background-color:#092d29; color:#bee8d4; font-size:12px; font-weight:700;">01</span></td>
-      <td valign="top" style="padding:4px 0 12px 0;">We'll email you as soon as early access to CoolNerdz opens.</td>
-    </tr>
-    <tr>
-      <td width="34" valign="top" style="padding:4px 0;"><span style="display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:8px; background-color:#092d29; color:#bee8d4; font-size:12px; font-weight:700;">02</span></td>
-      <td valign="top" style="padding:4px 0 12px 0;">You'll be among the first {{ entry.role|lower }}s to explore the platform.</td>
-    </tr>
-    <tr>
-      <td width="34" valign="top" style="padding:4px 0;"><span style="display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:8px; background-color:#092d29; color:#bee8d4; font-size:12px; font-weight:700;">03</span></td>
-      <td valign="top" style="padding:4px 0 12px 0;">No action needed for now. There's nothing else to set up.</td>
-    </tr>
-  </table>
-
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:18px;">
-    <tr>
-      <td class="btn" align="center" bgcolor="#092d29" style="border-radius:14px; background-color:#092d29;">
-        <a href="{{ site_url }}" style="display:inline-block; padding:14px 26px; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none; border-radius:14px;">Visit {{ site_domain }}</a>
+      <td width="4" bgcolor="#d96f5f" style="width:4px; background-color:#d96f5f; border-radius:4px; font-size:0; line-height:0;">&nbsp;</td>
+      <td style="padding:4px 0 4px 16px; font-size:14px; line-height:22px; color:#3a4642;">
+        <strong style="color:#101615;">Made with {{ entry.role|lower }}s in mind.</strong>
+        {% if entry.role == 'Student' %}Courses that adapt to you, progress you can see, and calm tools for the stressful weeks.
+        {% elif entry.role == 'Teacher' %}Run courses, follow each learner's progress, and spot who needs support early.
+        {% elif entry.role == 'Athlete' %}Train your mind like your body, with development plans, focus routines, and recovery tools.
+        {% elif entry.role == 'Counselor' %}Stay close to the people you support, with check-ins and counselor-supported care built in.
+        {% else %}Bring learning and wellbeing together for your whole team, with insight you can act on.
+        {% endif %}
       </td>
     </tr>
   </table>
 
-  <p style="margin:28px 0 0 0;">See you soon,<br><strong>The CoolNerdz team</strong></p>
+  <!-- What's coming -->
+  <h2 style="margin:38px 0 6px 0; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:22px; line-height:28px; font-weight:700; color:#101615;">What you're getting early access to</h2>
+  <p style="margin:0 0 18px 0; font-size:14px; line-height:22px; color:#62706a;">Everything you need to learn and feel well, in one place.</p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td class="stack stack-gap" width="50%" valign="top" style="padding:0 6px 12px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#dcecf7" style="background-color:#dcecf7; border-radius:16px; border-collapse:separate;">
+          <tr><td style="padding:18px 18px 16px 18px;">
+            <div style="font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:16px; line-height:21px; font-weight:700; color:#101615;">Smart courses</div>
+            <div style="margin-top:4px; font-size:13px; line-height:20px; color:#3a4642;">AI-powered lessons that meet you where you are.</div>
+          </td></tr>
+        </table>
+      </td>
+      <td class="stack stack-gap" width="50%" valign="top" style="padding:0 0 12px 6px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#e2f2e9" style="background-color:#e2f2e9; border-radius:16px; border-collapse:separate;">
+          <tr><td style="padding:18px 18px 16px 18px;">
+            <div style="font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:16px; line-height:21px; font-weight:700; color:#101615;">Progress tracking</div>
+            <div style="margin-top:4px; font-size:13px; line-height:20px; color:#3a4642;">See growth clearly, week by week and goal by goal.</div>
+          </td></tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="stack stack-gap" width="50%" valign="top" style="padding:0 6px 0 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ede5f6" style="background-color:#ede5f6; border-radius:16px; border-collapse:separate;">
+          <tr><td style="padding:18px 18px 16px 18px;">
+            <div style="font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:16px; line-height:21px; font-weight:700; color:#101615;">Athlete development</div>
+            <div style="margin-top:4px; font-size:13px; line-height:20px; color:#3a4642;">Mindset, focus, and recovery for peak performance.</div>
+          </td></tr>
+        </table>
+      </td>
+      <td class="stack stack-gap" width="50%" valign="top" style="padding:0 0 0 6px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffe3da" style="background-color:#ffe3da; border-radius:16px; border-collapse:separate;">
+          <tr><td style="padding:18px 18px 16px 18px;">
+            <div style="font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:16px; line-height:21px; font-weight:700; color:#101615;">Calm &amp; care</div>
+            <div style="margin-top:4px; font-size:13px; line-height:20px; color:#3a4642;">Calm tools and counselor-supported care, built in.</div>
+          </td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <!-- What happens next -->
+  <h2 style="margin:38px 0 18px 0; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:22px; line-height:28px; font-weight:700; color:#101615;">What happens next</h2>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td width="44" valign="top" align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="30" height="30" align="center" valign="middle" bgcolor="#092d29" style="width:30px; height:30px; border-radius:999px; background-color:#092d29; color:#bee8d4; font-size:13px; line-height:30px; font-weight:700;">1</td></tr></table>
+      </td>
+      <td valign="top" style="padding:3px 0 20px 8px;">
+        <strong style="color:#101615;">Sit tight.</strong> No action needed for now. There's nothing else to set up.
+      </td>
+    </tr>
+    <tr>
+      <td width="44" valign="top" align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="30" height="30" align="center" valign="middle" bgcolor="#21483f" style="width:30px; height:30px; border-radius:999px; background-color:#21483f; color:#bee8d4; font-size:13px; line-height:30px; font-weight:700;">2</td></tr></table>
+      </td>
+      <td valign="top" style="padding:3px 0 20px 8px;">
+        <strong style="color:#101615;">Watch your inbox.</strong> We'll email you the moment early access to CoolNerdz opens.
+      </td>
+    </tr>
+    <tr>
+      <td width="44" valign="top" align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="30" height="30" align="center" valign="middle" bgcolor="#4c7c5e" style="width:30px; height:30px; border-radius:999px; background-color:#4c7c5e; color:#ffffff; font-size:13px; line-height:30px; font-weight:700;">3</td></tr></table>
+      </td>
+      <td valign="top" style="padding:3px 0 0 8px;">
+        <strong style="color:#101615;">Get in first.</strong> You'll be among the first {{ entry.role|lower }}s to explore the platform.
+      </td>
+    </tr>
+  </table>
+
+  <!-- CTA -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:34px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" class="btn" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center" bgcolor="#092d29" style="border-radius:999px; background-color:#092d29; background-image:linear-gradient(135deg,#092d29,#2f5f4d);">
+              <a href="{{ site_url }}" style="display:inline-block; padding:16px 34px; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:15px; line-height:20px; font-weight:700; color:#ffffff; text-decoration:none; border-radius:999px;">Visit {{ site_domain }} &rarr;</a>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:14px 0 0 0; font-size:13px; line-height:20px; color:#62706a;">Know someone who'd love this? Forward them this email.</p>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Sign-off -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:34px; border-top:1px solid #ebe1d3;">
+    <tr>
+      <td style="padding-top:24px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="40" height="40" align="center" valign="middle" bgcolor="#092d29" style="width:40px; height:40px; border-radius:999px; background-color:#092d29; background-image:linear-gradient(135deg,#092d29,#4c7c5e); color:#ffffff; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:13px; font-weight:800;">CN</td>
+            <td style="padding-left:12px; font-size:14px; line-height:20px; color:#62706a;">
+              See you soon,<br><strong style="font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:15px; color:#101615;">The CoolNerdz team</strong>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 {% endblock %}
 
 {% block footer_note %}You're receiving this because this address joined the CoolNerdz waitlist at {{ site_domain }}. If that wasn't you, you can safely ignore this email.{% endblock %}
