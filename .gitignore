@@ -12,6 +12,10 @@ yarn-error.log
 dist/
 build/
 
+# env
+env/
+
+
 # Editor/IDE
 .vscode/
 .idea/
@@ -26,3 +30,25 @@ build/
 .env.production.local
 *.sqlite
 *.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.Python
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/

@@ -7,16 +7,23 @@ on:
 
 jobs:
   validate:
-    name: Validate HTML
+    name: Validate Django project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check required files exist
-        run: test -f index.html
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-      - name: Lint HTML
-        run: npx --yes html-validate index.html
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Django system check
+        run: python manage.py check
+
+      - name: Run tests
+        run: python manage.py test
 
   deploy:
     name: Deploy to server
@@ -55,13 +62,16 @@ jobs:
           rsync -avz --delete \
             --exclude='.git' \
             --exclude='.github' \
-            --exclude='node_modules' \
+            --exclude='env' \
             --exclude='*.sqlite' \
             --exclude='*.sqlite3' \
+            --exclude='.env' \
+            --exclude='staticfiles' \
+            --exclude='media' \
             -e "ssh -p ${SSH_PORT:-22}" \
             ./ "$SSH_USER@$SSH_HOST:/opt/coolnerdz-landing-page/"
 
-      - name: Install dependencies and restart app
+      - name: Install dependencies, migrate, and restart app
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -72,9 +82,9 @@ jobs:
           ssh -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" '
             set -e
             cd /opt/coolnerdz-landing-page
-            npm install --omit=dev
-            npx pm2 describe coolnerdz-waitlist > /dev/null 2>&1 \
-              && PORT=3003 npx pm2 restart coolnerdz-waitlist --update-env \
-              || PORT=3003 npx pm2 start server.js --name coolnerdz-waitlist
-            npx pm2 save
+            test -d env || python3 -m venv env
+            env/bin/pip install -r requirements.txt
+            env/bin/python manage.py migrate --noinput
+            env/bin/python manage.py collectstatic --noinput
+            sudo systemctl restart coolnerdz-django
           '

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page not found | CoolNerdz{% endblock %}
+{% block content %}
+  <main class="wrap" style="padding: 160px 0 120px; text-align:center;">
+    <h1>404</h1>
+    <p>We couldn't find the page you're looking for.</p>
+    <a class="btn" href="{% url 'users:home' %}">Back to CoolNerdz</a>
+  </main>
+{% endblock %}

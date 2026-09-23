@@ -1,0 +1,17 @@
+[Unit]
+Description=CoolNerdz Django app (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/coolnerdz-landing-page
+EnvironmentFile=/opt/coolnerdz-landing-page/.env
+ExecStart=/opt/coolnerdz-landing-page/env/bin/gunicorn \
+    --workers 3 \
+    --bind 127.0.0.1:8000 \
+    coolnerdz.wsgi:application
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
