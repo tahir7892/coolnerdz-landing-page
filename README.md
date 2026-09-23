@@ -46,7 +46,7 @@ nginx.coolnerdz.com.conf
 Gunicorn runs as the `coolnerdz-django` systemd service (see
 `deploy/coolnerdz-django.service`), fronted by Nginx
 (`nginx.coolnerdz.com.conf`), which proxies all requests to Gunicorn on
-`127.0.0.1:8000` and serves `/static/` and `/media/` directly.
+the unix socket `/run/coolnerdz/gunicorn.sock` and serves `/static/` and `/media/` directly.
 
 The GitHub Actions workflow in `.github/workflows/deploy.yml` rsyncs the
 repo to the server, installs Python dependencies into a venv, runs

@@ -1,9 +1,11 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from users.models import WaitlistEntry
 
 
+# The production .env enables SECURE_SSL_REDIRECT; the test client speaks plain HTTP.
+@override_settings(SECURE_SSL_REDIRECT=False)
 class HomeViewTests(TestCase):
     def test_home_page_renders(self):
         response = self.client.get(reverse('users:home'))
@@ -12,6 +14,7 @@ class HomeViewTests(TestCase):
         self.assertContains(response, 'id="waitlist-form"')
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class WaitlistAPITests(TestCase):
     def test_create_requires_email_and_role(self):
         response = self.client.post('/api/waitlist', {}, content_type='application/json')

@@ -3,15 +3,23 @@ Description=CoolNerdz Django app (Gunicorn)
 After=network.target
 
 [Service]
-User=www-data
+User=coolnerdz
 Group=www-data
 WorkingDirectory=/opt/coolnerdz-landing-page
 EnvironmentFile=/opt/coolnerdz-landing-page/.env
+# /run/coolnerdz is created as coolnerdz:www-data so Nginx can reach the socket.
+RuntimeDirectory=coolnerdz
+RuntimeDirectoryMode=0750
 ExecStart=/opt/coolnerdz-landing-page/env/bin/gunicorn \
     --workers 3 \
-    --bind 127.0.0.1:8000 \
+    --bind unix:/run/coolnerdz/gunicorn.sock \
+    --umask 007 \
+    --timeout 60 \
+    --access-logfile - \
+    --error-logfile - \
     coolnerdz.wsgi:application
-Restart=always
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target

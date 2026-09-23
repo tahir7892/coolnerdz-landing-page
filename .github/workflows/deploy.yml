@@ -59,12 +59,14 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-          rsync -avz --delete \
+          rsync -rlptvz --delete \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='env' \
             --exclude='*.sqlite' \
             --exclude='*.sqlite3' \
+            --exclude='*.sqlite3-*' \
+            --exclude='*.sqlite3.backup-*' \
             --exclude='.env' \
             --exclude='staticfiles' \
             --exclude='media' \
