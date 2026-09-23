@@ -1,0 +1,16 @@
+{% autoescape off %}New CoolNerdz Waitlist Signup
+
+Someone just joined the CoolNerdz waitlist at {{ site_domain }}.
+
+Email:         {{ entry.email }}
+Role:          {{ entry.role }}
+Signed up:     {{ entry.created_at|date:"l, F j, Y \a\t H:i" }} UTC
+Entry ID:      #{{ entry.pk }}
+Total signups: {{ total_signups }}
+
+{% if subscriber_emailed %}A welcome confirmation was sent to the subscriber.{% else %}HEADS UP: the welcome confirmation to this subscriber could not be delivered. Check the coolnerdz-django service logs.{% endif %}
+Replying to this message goes straight to the subscriber.
+
+--
+Internal notification for the CoolNerdz team · {{ site_url }}
+{% endautoescape %}

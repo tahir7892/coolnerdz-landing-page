@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>{% block title %}CoolNerdz{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table { border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; }
+    img { border: 0; outline: none; text-decoration: none; }
+    a { color: #21483f; }
+    @media only screen and (max-width: 620px) {
+      .container { width: 100% !important; }
+      .px { padding-left: 22px !important; padding-right: 22px !important; }
+      .hero-title { font-size: 30px !important; line-height: 36px !important; }
+      .stack { display: block !important; width: 100% !important; }
+      .btn a { display: block !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f8f1e8;">
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f8f1e8; opacity:0;">{% block preheader %}{% endblock %}&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f8f1e8" style="background-color:#f8f1e8;">
+    <tr>
+      <td align="center" style="padding:32px 12px;">
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; border-collapse:separate;">
+
+          <!-- Brand -->
+          <tr>
+            <td class="px" style="padding:0 8px 18px 8px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="38" height="38" align="center" valign="middle" bgcolor="#092d29" style="width:38px; height:38px; border-radius:12px; background-color:#092d29; background-image:linear-gradient(135deg,#092d29,#4c7c5e); color:#ffffff; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:13px; font-weight:700; letter-spacing:.5px;">CN</td>
+                  <td style="padding-left:10px; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:18px; font-weight:700; color:#101615;">
+                    CoolNerdz
+                    <div style="font-family:'Inter',Arial,Helvetica,sans-serif; font-size:11px; font-weight:600; color:#62706a; line-height:14px;">{% block brand_tagline %}Coming soon{% endblock %}</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td bgcolor="#fffaf1" style="background-color:#fffaf1; border-radius:24px; border:1px solid #e7ddd0; overflow:hidden;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <!-- Hero -->
+                <tr>
+                  <td class="px" bgcolor="#092d29" style="background-color:#092d29; background-image:linear-gradient(135deg,#092d29 0%,#21483f 60%,#4c7c5e 100%); border-radius:24px 24px 0 0; padding:40px 44px 36px 44px;">
+                    <span style="display:inline-block; padding:6px 12px; border-radius:999px; background-color:#bee8d4; color:#092d29; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:12px; font-weight:700; letter-spacing:.3px;">{% block eyebrow %}{% endblock %}</span>
+                    <h1 class="hero-title" style="margin:18px 0 10px 0; font-family:'Outfit',Arial,Helvetica,sans-serif; font-size:36px; line-height:42px; font-weight:700; color:#ffffff;">{% block hero_title %}{% endblock %}</h1>
+                    <p style="margin:0; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:16px; line-height:25px; color:#d9e9d1;">{% block hero_lead %}{% endblock %}</p>
+                  </td>
+                </tr>
+                <!-- Body -->
+                <tr>
+                  <td class="px" style="padding:34px 44px 38px 44px; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#101615;">
+                    {% block content %}{% endblock %}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="px" align="center" style="padding:26px 24px 8px 24px; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:12px; line-height:19px; color:#62706a;">
+              <a href="{{ site_url }}" style="color:#21483f; font-weight:700; text-decoration:none;">{{ site_domain }}</a> &middot; Built for learning, growth, and care.
+              <br>
+              {% block footer_note %}{% endblock %}
+              <br>&copy; {% now "Y" %} CoolNerdz. All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

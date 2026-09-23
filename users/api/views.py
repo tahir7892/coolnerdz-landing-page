@@ -1,9 +1,17 @@
+import logging
+
 from rest_framework import generics, status
 from rest_framework.response import Response
 
 from users.models import WaitlistEntry
+from users.services.email_service import send_waitlist_emails
 
 from .serializers import WaitlistEntrySerializer
+
+logger = logging.getLogger(__name__)
+
+SUCCESS_MESSAGE = "You're on the waitlist! We'll be in touch soon."
+SUCCESS_MESSAGE_EMAILED = "You're on the waitlist! Check your inbox for a confirmation email."
 
 
 class WaitlistListCreateAPIView(generics.ListCreateAPIView):
@@ -49,8 +57,13 @@ class WaitlistListCreateAPIView(generics.ListCreateAPIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        serializer.save()
+        entry = serializer.save()
+        logger.info('Waitlist signup created: id=%s role=%s.', entry.pk, entry.role)
+
+        # The entry is committed at this point; email problems are logged by
+        # the service and never turn a successful signup into an error.
+        sent = send_waitlist_emails(entry)
         return Response(
-            {'message': "You're on the waitlist! We'll be in touch soon."},
+            {'message': SUCCESS_MESSAGE_EMAILED if sent['subscriber'] else SUCCESS_MESSAGE},
             status=status.HTTP_201_CREATED,
         )

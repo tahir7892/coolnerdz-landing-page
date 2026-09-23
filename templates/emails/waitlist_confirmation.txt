@@ -1,0 +1,26 @@
+{% autoescape off %}Welcome to CoolNerdz. You're on the list.
+
+Hi there,
+
+Thanks for joining the CoolNerdz waitlist. Your spot is confirmed.
+
+We're building CoolNerdz as a smarter way to learn, grow, and feel supported: an AI-powered learning and wellbeing platform for courses, progress tracking, athlete development, calm tools, and counselor-supported care. We're glad you're part of it from the start.
+
+YOUR WAITLIST REGISTRATION
+Email:      {{ entry.email }}
+Joining as: {{ entry.role }}
+
+WHAT HAPPENS NEXT
+01  We'll email you as soon as early access to CoolNerdz opens.
+02  You'll be among the first {{ entry.role|lower }}s to explore the platform.
+03  No action needed for now. There's nothing else to set up.
+
+Visit {{ site_url }}
+
+See you soon,
+The CoolNerdz team
+
+--
+{{ site_domain }} · Built for learning, growth, and care.
+You're receiving this because this address joined the CoolNerdz waitlist at {{ site_domain }}. If that wasn't you, you can safely ignore this email.
+{% endautoescape %}

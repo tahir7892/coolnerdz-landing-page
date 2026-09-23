@@ -112,6 +112,43 @@ REST_FRAMEWORK = {
     ],
 }
 
+
+def env_bool(name, default=False):
+    return os.environ.get(name, str(default)).strip().lower() in ('1', 'true', 'yes', 'on')
+
+
+# Email (all SMTP values come from the environment; see .env.example).
+# Waitlist emails are skipped, with a logged warning, while EMAIL_HOST is empty.
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND') or 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT') or 587)
+EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', True)
+EMAIL_USE_SSL = env_bool('EMAIL_USE_SSL', False)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_TIMEOUT = int(os.environ.get('EMAIL_TIMEOUT') or 10)
+# Empty values in .env count as unset, so the sender falls back to the SMTP login.
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL') or (
+    f'CoolNerdz <{EMAIL_HOST_USER}>' if EMAIL_HOST_USER else 'CoolNerdz <webmaster@localhost>'
+)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL') or 'tahir7892@gmail.com'
+SITE_URL = (os.environ.get('SITE_URL') or 'https://coolnerdz.com').rstrip('/')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[{levelname}] {name}: {message}', 'style': '{'},
+    },
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler', 'formatter': 'simple'},
+    },
+    'loggers': {
+        'users': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
+    },
+}
+
 if not DEBUG:
     # Nginx terminates TLS and always overwrites X-Forwarded-Proto with $scheme.
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
